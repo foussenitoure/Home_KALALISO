@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from kalaliso.models import Person, Mesure
-from kalaliso.form import PersonForm, MesureForm
+from kalaliso.models import Person
+# Mesure
+from kalaliso.form import PersonForm
+# MesureForm
 
 
 # Create your views here.
@@ -58,36 +60,36 @@ def get_form_data(request):
             return HttpResponseRedirect(reverse('thanks'))
     else:
        form = PersonForm()
-    return render(request, 'folders_html/form.html', {'form':form})
+    return render(request, 'folders_html/templates/form.html', {'form':form})
 
 
-def merci(request):
-    return HttpResponse('Thanks, your messure had well added')
-
-def mesure_data(request):
-    if request.method == 'POST':
-            coud  = request.POST.get("coude")
-            epau   = request.POST.get("epaule")
-            ma = request.POST.get("manche")
-            to_ma   = request.POST.get("tour_manche")
-            tail   = request.POST.get("taille")
-            poitr = request.POST.get("pointrine")
-            lo_bo = request.POST.get("longueur_boubou")
-            lo_pa = request.POST.get("longueur_patanlon")
-            fes = request.POST.get("fesse")
-            cei = request.POST.get("ceinture")
-            cui = request.POST.get("cuisse")
-            pat = request.POST.get("patte")
-
-
-            data = Mesure(coude=coud, epaule=epau, manche=ma,
-                          tour_manche=to_ma, taille=tail,
-                          poitrine=poitr, longueur_boubou=lo_bo,
-                          longueur_patanlon=lo_pa, fesse=fes,
-                          ceinture=cei, cuisse=cui, patte=pat,)
-            data.save()
-            return HttpResponseRedirect(reverse('merci'))
-    else:
-       form = MesureForm()
-    return render(request, 'folders_html/mesur.html', {'form':form})
+# def merci(request):
+#     return HttpResponse('Thanks, your messure had well added')
+#
+# def mesure_data(request):
+#     if request.method == 'POST':
+#             coud  = request.POST.get("coude")
+#             epau   = request.POST.get("epaule")
+#             ma = request.POST.get("manche")
+#             to_ma   = request.POST.get("tour_manche")
+#             tail   = request.POST.get("taille")
+#             poitr = request.POST.get("pointrine")
+#             lo_bo = request.POST.get("longueur_boubou")
+#             lo_pa = request.POST.get("longueur_patanlon")
+#             fes = request.POST.get("fesse")
+#             cei = request.POST.get("ceinture")
+#             cui = request.POST.get("cuisse")
+#             pat = request.POST.get("patte")
+#
+#
+#             data = Mesure(coude=coud, epaule=epau, manche=ma,
+#                           tour_manche=to_ma, taille=tail,
+#                           poitrine=poitr, longueur_boubou=lo_bo,
+#                           longueur_patanlon=lo_pa, fesse=fes,
+#                           ceinture=cei, cuisse=cui, patte=pat,)
+#             data.save()
+#             return HttpResponseRedirect(reverse('merci'))
+#     else:
+#        form = MesureForm()
+#     return render(request, 'folders_html/mesur.html', {'form':form})
 

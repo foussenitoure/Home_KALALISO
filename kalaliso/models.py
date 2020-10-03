@@ -50,107 +50,112 @@ class Person(models.Model):
     def __str__(self):
         return'{}{}'.format(self.prenom, self.nom)
 
-class Mesure(models.Model):
-    person = models.OneToOneField('Person', on_delete=models.DO_NOTHING, verbose_name='Nom client',)
-    coude = models.FloatField()
-    epaule = models.FloatField()
-    manche = models.FloatField(null=True, blank=True)
-    tour_manche = models.FloatField(null=True, blank=True)
-    taille = models.FloatField(null=True, blank=True)
-    poitrine = models.FloatField(null=True, blank=True)
-    longueur_boubou = models.FloatField(null=True, blank=True)
-    longueur_patanlon = models.FloatField(null=True, blank=True)
-    fesse = models.FloatField(null=True, blank=True)
-    ceinture = models.FloatField(null=True, blank=True)
-    cuisse = models.FloatField(null=True, blank=True)
-    patte = models.FloatField(null=True, blank=True)
+# class Mesure(models.Model):
+#     person = models.OneToOneField('Person', on_delete=models.DO_NOTHING, verbose_name='Nom client',)
+#     coude = models.FloatField()
+#     epaule = models.FloatField()
+#     manche = models.FloatField(null=True, blank=True)
+#     tour_manche = models.FloatField(null=True, blank=True)
+#     taille = models.FloatField(null=True, blank=True)
+#     poitrine = models.FloatField(null=True, blank=True)
+#     longueur_boubou = models.FloatField(null=True, blank=True)
+#     longueur_patanlon = models.FloatField(null=True, blank=True)
+#     fesse = models.FloatField(null=True, blank=True)
+#     ceinture = models.FloatField(null=True, blank=True)
+#     cuisse = models.FloatField(null=True, blank=True)
+#     patte = models.FloatField(null=True, blank=True)
+#
+#     def __str__(self):
+#         return'{}'.format(self.person)
 
-    def __str__(self):
-        return'{}'.format(self.person)
-
-class Produit(models.Model):
-    MODELE = (
-        ('Boubou', 'Boubou'),
-        ('Grand Boubou', 'Grand Boubou'),
-        ('Chemise Complet', 'Chemise Complet'),
-        ('Chemise Manche Long', 'Chemise Manche Long'),
-        ('Chemise Manche Court', 'Chemise Manche Court'),
-        ('Pagne Jupe', 'Pagne Jupe'),
-        ('Pagne Complet', 'Pagne Complet'),
-        ('Pagne Maniere', 'Pagne Maniere'),
-        ('Patanlon', 'Patanlon'),
-        ('Tenu Scolaire', 'Tenu Scolaire'),
-        ('Tenu Securite', 'Tenu Securite'),
-        ('AUTRES', 'AUTRES'),
-    )
-    modele = models.CharField(max_length=25, choices=MODELE, default='Boubou')
-    def __str__(self):
-            return'{}'.format(self.modele,)
+# class Produit(models.Model):
+#     MODELE = (
+#         ('Boubou', 'Boubou'),
+#         ('Grand Boubou', 'Grand Boubou'),
+#         ('Chemise Complet', 'Chemise Complet'),
+#         ('Chemise Manche Long', 'Chemise Manche Long'),
+#         ('Chemise Manche Court', 'Chemise Manche Court'),
+#         ('Pagne Jupe', 'Pagne Jupe'),
+#         ('Pagne Complet', 'Pagne Complet'),
+#         ('Pagne Maniere', 'Pagne Maniere'),
+#         ('Patanlon', 'Patanlon'),
+#         ('Tenu Scolaire', 'Tenu Scolaire'),
+#         ('Tenu Securite', 'Tenu Securite'),
+#         ('AUTRES', 'AUTRES'),
+#     )
+#     modele = models.CharField(max_length=25, choices=MODELE, default='Boubou')
+#     def __str__(self):
+#             return'{}'.format(self.modele,)
 
 
-class Commande(models.Model):
-    COUTURE = (
-        ('BRODERIE', 'Broderie'),
-        ('COUTURE SIMPLE', 'Couture simple'),
-        ('COUTURE A MAIN', 'Couture a main'),
-        ('REPARATION', 'Reparation'),
-    )
-    couture = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
-    TISSU = (
-        ('BAZIN GETZNER', 'BAZIN GETZNER'),
-        ('BAZIN RICHE', 'BAZIN RICHE'),
-        ('BAZIN MOYEN', 'BAZIN MOYEN'),
-        ('WAX', 'WAX'),
-        ('TISSU', 'TISSU'),
-        ('LEGER', 'LEGER'),
-        ('BRODE', 'BRODE'),
-        ('PERCALE', 'PERCALE'),
-        ('VOILE', 'VOILE'),
-        ('BOGOLAN', 'BOGOLAN'),
-        ('AUTRES', 'AUTRES'),
-    )
-    tissu = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
-    COULOIR = (
-        ('BLANCHE', 'BLANCHE'),
-        ('ROUGE SANG', 'ROUGE SANG'),
-        ('BLEU', 'BLEU'),
-        ('ORANGE', 'ORANGE'),
-        ('ROSE', 'ROSE'),
-        ('VERT', 'VERT'),
-        ('GRIS', 'GRIS'),
-        ('GRIS CLAIR', 'GRIS CLAIR'),
-        ('VIOLET', 'VIOLET'),
-        ('MARON', 'MARON'),
-        ('MARON CLAIR', 'MARON CLAIR'),
-        ('TURGUOISE', 'TURGUOISE'),
-        ('JAUNE', 'JAUNE'),
-        ('JAUNE COUSIN', 'JAUNE COUSIN'),
-        ('NOIR', 'NOIR'),
-        ('BAGA', 'BAGA'),
-        ('BAGA CLAIR', 'BAGA CLAIR'),
-        ('DEUX TONS', 'DEUX TONS'),
-        ('MULTICOLOR', 'MULTICOLOR'),
-    )
+# class Commande(models.Model):
+#     COUTURE = (
+#         ('BRODERIE', 'Broderie'),
+#         ('COUTURE SIMPLE', 'Couture simple'),
+#         ('COUTURE A MAIN', 'Couture a main'),
+#         ('REPARATION', 'Reparation'),
+#     )
+#     couture = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
+#     TISSU = (
+#         ('BAZIN GETZNER', 'BAZIN GETZNER'),
+#         ('BAZIN RICHE', 'BAZIN RICHE'),
+#         ('BAZIN MOYEN', 'BAZIN MOYEN'),
+#         ('WAX', 'WAX'),
+#         ('TISSU', 'TISSU'),
+#         ('LEGER', 'LEGER'),
+#         ('BRODE', 'BRODE'),
+#         ('PERCALE', 'PERCALE'),
+#         ('VOILE', 'VOILE'),
+#         ('BOGOLAN', 'BOGOLAN'),
+#         ('AUTRES', 'AUTRES'),
+#     )
+#     tissu = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
+#     COULOIR = (
+#         ('BLANCHE', 'BLANCHE'),
+#         ('ROUGE SANG', 'ROUGE SANG'),
+#         ('BLEU', 'BLEU'),
+#         ('ORANGE', 'ORANGE'),
+#         ('ROSE', 'ROSE'),
+#         ('VERT', 'VERT'),
+#         ('GRIS', 'GRIS'),
+#         ('GRIS CLAIR', 'GRIS CLAIR'),
+#         ('VIOLET', 'VIOLET'),
+#         ('MARON', 'MARON'),
+#         ('MARON CLAIR', 'MARON CLAIR'),
+#         ('TURGUOISE', 'TURGUOISE'),
+#         ('JAUNE', 'JAUNE'),
+#         ('JAUNE COUSIN', 'JAUNE COUSIN'),
+#         ('NOIR', 'NOIR'),
+#         ('BAGA', 'BAGA'),
+#         ('BAGA CLAIR', 'BAGA CLAIR'),
+#         ('DEUX TONS', 'DEUX TONS'),
+#         ('MULTICOLOR', 'MULTICOLOR'),
+#     )
+#
+#     couloir = models.CharField(max_length=25, choices=COULOIR, default='BLANCHE')
+#     command_person = models.ForeignKey('Person',  on_delete=models.CASCADE, verbose_name='Titulaire command',)
+#     produit = models.ManyToManyField('Produit', verbose_name='Nouveau produit',)
+#     quantite = models.PositiveSmallIntegerField()
+#     metrage = models.FloatField()
+#     prix_unitaire = models.FloatField()
+#     montant_total = models.FloatField()
+#     avance = models.FloatField()
+#     reliquat = models.FloatField()
+#     remise = models.FloatField(default=0)
+#     reception = models.DateTimeField(auto_now_add=True)
+#     rendez_vous = models.DateField()
+#     livre = models.BooleanField(default=False)
+#
+#     def __str__(self):
+#         return str(self.id)
+#
+#     class Meta:
+#           ordering = ('reception',)
 
-    couloir = models.CharField(max_length=25, choices=COULOIR, default='BLANCHE')
-    command_person = models.ForeignKey('Person',  on_delete=models.CASCADE, verbose_name='Titulaire command',)
-    produit = models.ManyToManyField('Produit', verbose_name='Nouveau produit',)
-    quantite = models.PositiveSmallIntegerField()
-    metrage = models.FloatField()
-    prix_unitaire = models.FloatField()
-    montant_total = models.FloatField()
-    avance = models.FloatField()
-    reliquat = models.FloatField()
-    remise = models.FloatField(default=0)
-    reception = models.DateTimeField(auto_now_add=True)
-    rendez_vous = models.DateField()
-    livre = models.BooleanField(default=False)
 
-    def __str__(self):
-        return str(self.id)
+                        # PAUSE
 
-    class Meta:
-          ordering = ('reception',)
+
 
     # les champs supplementaires des données à caractère personnelle.
 

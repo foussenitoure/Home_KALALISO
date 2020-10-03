@@ -1,26 +1,22 @@
-<!DOCTYPE html>
 {% load static %}
+
+<!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="../folder_css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="../folder_css/style.css"/>
+    </head>
+<title>KALALISO</title>
 
-<head>
-<link rel="stylesheet" href="../folder_css/style.css" />
-<title>{% block title %}KALALISO COUTURE {% endblock %}</title>
-<link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
-</head>
+<body class="container col-lg-10">
 
-<body>
-    <div id="sidebar">
-    {% block sidebar %}
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/flat/">Flat</a></li>
-        </ul>
-    {% endblock %} </div>
-    <div id="content">
-        {% block content %}
-           <h1>home day</h1>
-        {% endblock content %}
-    </div>
-<script src="{% static  'js/bootstrap.min.js'%}"></script>
+   {% block content%}
+   {% endblock%}
+
+{#    <script  src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>#}
+      <script type="text/javascript" src="../folder_jquery/Jquery-3.5.1.min.js"></script>   <!-- JAVASCRIPT HERE -->                         <!-- JQUERY HERE -->
+      <script type="text/javascript" src="../folder_jquery/users.js"></script>
+
 </body>
 </html>

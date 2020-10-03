@@ -7,7 +7,8 @@ from django.contrib import auth
 from django import forms
 from django.utils import timezone
 # from suit.admin import SortableTabularInline
-from kalaliso.models import Person, Mesure, Commande, Produit
+from kalaliso.models import Person
+    # Mesure, Commande, Produit
 
     #  Depense, ,  Vente, Programme, \
     # DivisionAdministrativeMali
@@ -64,109 +65,74 @@ class PersonAdmin(admin.ModelAdmin):
     search_fields = ['prenom', 'nom', 'contact_1']
 admin.site.register(Person, PersonAdmin)
 
-class MesureAdmin(admin.ModelAdmin):
-    # inlines = ('MesureAdmin',)
-    save_on_top = True
-    models = Mesure
-    fields = ['person',
-              'coude',
-              'epaule',
-              'manche',
-              'tour_manche',
-              'poitrine',
-              'longueur_patanlon',
-              'longueur_boubou',
-              'ceinture',
-              'cuisse',
-              'taille',
-              'fesse',
-              'patte',
-              ]
-
-    # exclude = [ ]
-    list_display = ('person',
-                    'coude',
-                    'epaule',
-                    'manche',
-                    'tour_manche',
-                    'poitrine',
-                    'longueur_patanlon',
-                    'longueur_boubou',
-                    'ceinture',
-                    'cuisse',
-                    'taille',
-                    'fesse',
-                    'patte',)
-
-    list_filter = ['person']
-    search_fields = ['prenom', 'nom']
-admin.site.register(Mesure, MesureAdmin)
 
 
 
-class ProduitAdmin(admin.ModelAdmin):
-    save_on_top = True
-    models = Produit
-    fields = ['modele',
-              ]
-    list_display = ('modele',
-                    )
+# class ProduitAdmin(admin.ModelAdmin):
+#     save_on_top = True
+#     models = Produit
+#     fields = ['modele',
+#               ]
+#     list_display = ('modele',
+#                     )
+#
+#     # ordering = ['']
+#     list_filter = ['modele',]
+#     # search_fields = ['prenom', 'nom']
+# admin.site.register(Produit, ProduitAdmin)
 
-    # ordering = ['']
-    list_filter = ['modele',]
-    # search_fields = ['prenom', 'nom']
-admin.site.register(Produit, ProduitAdmin)
+
+# class CommandeAdmin(admin.ModelAdmin):
+#     save_on_top = True
+#     models = Commande
+#
+#     fields = [
+#               'command_person',
+#               'produit',
+#               # 'mesure',
+#                'quantite',
+#                'couture',
+#                'tissu',
+#                'couloir',
+#                'metrage',
+#                'prix_unitaire',
+#                'avance',
+#                'reliquat',
+#                'remise',
+#                'montant_total',
+#                'rendez_vous',
+#                'reception',
+#                'livre',
+#               ]
+#
+#     # exclude = ['created_at']
+#     list_display = (
+#                      # 'command_person',
+#                      # 'produit',
+#                      # 'mesure',
+#                      'quantite',
+#                      'couture',
+#                      'tissu',
+#                      'couloir',
+#                      'metrage',
+#                      'prix_unitaire',
+#                      'avance',
+#                      'reliquat',
+#                      'remise',
+#                      'montant_total',
+#                      'rendez_vous',
+#                      'reception',
+#                      'livre',
+#                    )
+#
+#     ordering = ['reception']
+#
+#     list_filter = ['rendez_vous', 'livre', 'reception',]
+#
+#     search_fields = ['produit', 'rendez_vous', 'reception',]
+# admin.site.register(Commande, CommandeAdmin)
 
 
-class CommandeAdmin(admin.ModelAdmin):
-    save_on_top = True
-    models = Commande
-
-    fields = [
-              'command_person',
-              'produit',
-              # 'mesure',
-               'quantite',
-               'couture',
-               'tissu',
-               'couloir',
-               'metrage',
-               'prix_unitaire',
-               'avance',
-               'reliquat',
-               'remise',
-               'montant_total',
-               'rendez_vous',
-               'reception',
-               'livre',
-              ]
-
-    # exclude = ['created_at']
-    list_display = (
-                     # 'command_person',
-                     # 'produit',
-                     # 'mesure',
-                     'quantite',
-                     'couture',
-                     'tissu',
-                     'couloir',
-                     'metrage',
-                     'prix_unitaire',
-                     'avance',
-                     'reliquat',
-                     'remise',
-                     'montant_total',
-                     'rendez_vous',
-                     'reception',
-                     'livre',
-                   )
-
-    ordering = ['reception']
-
-    list_filter = ['rendez_vous', 'livre', 'reception',]
-
-    search_fields = ['produit', 'rendez_vous', 'reception',]
-admin.site.register(Commande, CommandeAdmin)
 
 
 # class DepenseAdmin(admin.ModelAdmin):

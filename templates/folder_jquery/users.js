@@ -1,4 +1,4 @@
 $(document).ready(function() {
-    alert('hello world');
+    alert('Bienvenue Chez Kalaliso * ');
     
 });

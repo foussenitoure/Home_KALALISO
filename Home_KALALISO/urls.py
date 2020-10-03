@@ -26,8 +26,8 @@ urlpatterns = [
     # url(r'^newPage/$', views.newPage, name='newPage'),
     url(r'^thanks/$', views.thanks, name='thanks'),
     url(r'^getformdata/$', views.get_form_data, name='get-form-data'),
-    url(r'^merci/$', views.merci, name='merci'),
-    url(r'^mesure/$', views.mesure_data, name='get-mesure-data'),
+    # url(r'^merci/$', views.merci, name='merci'),
+    # url(r'^mesure/$', views.mesure_data, name='get-mesure-data'),
     # url(r'^users_detail/$', views.users_detail, name='users_detail'),
 
 ]
