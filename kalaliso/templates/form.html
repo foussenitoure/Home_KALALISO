@@ -1,14 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'folders_html/base.html' %}
+{% load static %}
 
 {% block content %}
-
-    <h2>REGISTRERED CLIENT</h2>
-
+    <h2>REGISTER CLIENT</h2>
     <form action="{% url 'get-form-data' %}" method="post">
         {% csrf_token %}
             <table>
                {{ form.as_table }}
-            </table>
-        <input type="submit" value="Submit">
+            </table><br />
+        <input type="submit" value="Submit" class="btn btn-primary">
     </form>
+{#    <script type="text/javascript" src="{% static '' %}"></script>#}
+
 {% endblock %}

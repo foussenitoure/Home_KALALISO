@@ -1,22 +1,108 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="../folder_css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="../folder_css/style.css"/>
-    </head>
+        <link rel="stylesheet" type="text/css" href="../bootstrap-4.5.2-dist/css/bootstrap.min.css/">
+        <link rel="stylesheet" type="text/css" href="../bootstrap-4.5.2-dist/style.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+{#        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>#}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">Kalaliso</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+{#            <form class="form-inline my-2 my-lg-0">#}
+{#              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+{#              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+{#            </form>#}
+          </div>
+ </nav>
+    </head><br /><br />
 <title>KALALISO</title>
 
-<body class="container col-lg-10">
+<body class="container">
 
-   {% block content%}
-   {% endblock%}
+       {% block content%}
 
-{#    <script  src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>#}
+       {% endblock%}<br /><br />
+<footer>
+             <div  class="container footer">
+                <div class= "row footer">
+{#                  <div id="imagetop">#}
+{#                     <ul class="list-inline text-center">#}
+{#                        <li><marquee href="#"><img src="/assets/imag24.png" alt="responsive" class="img-circle"></marquee></li>#}
+{#                         <li><marquee href="#"><img src="/assets/imag16.png" alt="responsive" class="img-circle"></marquee></li>#}
+{#                        <li><marquee href="#"><img src="/assets/imag18.png" alt="responsive" class="img-circle"></marquee></li>#}
+{#                     </ul>#}
+{#                </div>#}
+
+                <div>
+                        <ul class="col-xs-3>
+                            <li><a href="#" title="Click here!"><span class="glyphicon glyphicon-certificat"></span>Paiement en ligne</a></li>
+                            <li><a href="Conditions général.html" title="Click here!"><span class="glyphicon glyphicon-commande"></span>Conditions générales</a></li>
+                            <li><a href="Mentions légales.html"><span class="glyphicon glyphicon-formation"></span>Mentions légales</a></li>
+                        </ul><hr/>
+                    </div>
+                <div Mes Tweets class="col-xs-3">
+                        <ul class="text-left">
+                                <P class="text-black"><strong>Mes Tweets</strong></P>
+                                <li>Informer les acteurs</li>
+                                <li>Sensibiliser les acteurs artisants</li>
+                                <li>Contribuer à l'évolution vestimentaire</li>
+                        </ul>
+                </div>
+                 <div Mes Options class="col-xs-3">
+                        <ul class="text-left">
+                            <P class="text-black"><strong>Mes Options</strong></P>
+                            <li>Accès gratuit à la qualité</li>
+                            <li>Faciliter les innovations</li>
+                            <li>Partager les compétences</li>
+                        </ul>
+                </div>
+
+                <div Mes Produits class="col-xs-3">
+                        <ul class="text-left"  >
+                            <P class="text-black"><strong>Mes Produits</strong></P>
+                            <li>Bazin riche</li>
+                            <li>Tissu classique et leger</li>
+                            <li>Wax Hollandais</li>
+                        </ul>
+                </div>
+                  <div class="text-right" class="text-black">
+                    <a href="tourefousseni1@gmail.com"><em>Made by Gis Consulting4</em></a>
+                  </div>
+
+              </div> <!-- row footer -->
+ </div> <!-- container footer-->
+</footer>
+
       <script type="text/javascript" src="../folder_jquery/Jquery-3.5.1.min.js"></script>   <!-- JAVASCRIPT HERE -->                         <!-- JQUERY HERE -->
       <script type="text/javascript" src="../folder_jquery/users.js"></script>
 
-</body>
+ </body>
 </html>

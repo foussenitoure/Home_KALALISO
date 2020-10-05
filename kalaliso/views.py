@@ -57,10 +57,11 @@ def get_form_data(request):
             data = Person(status=sta, prenom=pre, nom=no, sex=se, contact_1=cont, email=ema)
             data.save()
 
+
             return HttpResponseRedirect(reverse('thanks'))
     else:
        form = PersonForm()
-    return render(request, 'folders_html/templates/form.html', {'form':form})
+    return render(request, '../templates/form.html', {'form':form})
 
 
 # def merci(request):
