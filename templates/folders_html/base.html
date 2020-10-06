@@ -36,10 +36,6 @@
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
               </li>
             </ul>
-{#            <form class="form-inline my-2 my-lg-0">#}
-{#              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-{#              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-{#            </form>#}
           </div>
  </nav>
     </head><br /><br />
@@ -47,7 +43,10 @@
 
 <body class="container">
 
-       {% block content%}
+       {% block content %}
+
+              <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+              <script type="text/javascript" src="../folder_jquery/users.js"></script>
 
        {% endblock%}<br /><br />
 <footer>
@@ -100,9 +99,9 @@
               </div> <!-- row footer -->
  </div> <!-- container footer-->
 </footer>
+{#      <script type="text/javascript" src="{% static "../folder_jquery/Jquery-3.5.1.min.js" %}"></script>#}
+{#      <script type="text/javascript" src="../folder_jquery/"></script>   <!-- JAVASCRIPT HERE -->                         <!-- JQUERY HERE -->#}
 
-      <script type="text/javascript" src="../folder_jquery/Jquery-3.5.1.min.js"></script>   <!-- JAVASCRIPT HERE -->                         <!-- JQUERY HERE -->
-      <script type="text/javascript" src="../folder_jquery/users.js"></script>
 
  </body>
 </html>
