@@ -3,12 +3,12 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="../bootstrap-4.5.2-dist/css/bootstrap.min.css/">
-        <link rel="stylesheet" type="text/css" href="../bootstrap-4.5.2-dist/style.css"/>
+{#        <link rel="stylesheet" type="text/css" href="../bootstrap-4.5.2-dist/css/bootstrap.min.css/">#}
+{#        <link rel="stylesheet" type="text/css" href="../bootstrap-4.5.2-dist/style.css"/>#}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-{#        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>#}
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Kalaliso</a>
+          <a class="navbar-brand" href="#"><h1>Kalaliso Couture</h1></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
           </button>
@@ -40,25 +40,50 @@
  </nav>
     </head><br /><br />
 <title>KALALISO</title>
+    <div>
+        <img src="{% static "img100.png" %}" alt="Logo" />
+    </div>
+{#    <div>#}
+{#        <h1>Bienvenue dans le monde de Kalaliso </h1>#}
+{#    </div><br /><br />#}
 
 <body class="container">
+{#       <table class="table-bordere" >#}
+{#           <tr>#}
+{#               Status#}
+{#           </tr>#}
+{#           <tr>#}
+{#               Nom#}
+{#           </tr>#}
+{#           <tr>#}
+{#               Prenon#}
+{#           </tr>#}
+{#           <tr>#}
+{#               Sex#}
+{#           </tr>#}
+{#           <tr>#}
+{#               Telephone#}
+{#           </tr>#}
+{#           <tr>#}
+{#               Email#}
+{#           </tr>#}
+{#       </table>#}
 
        {% block content %}
 
-              <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-              <script type="text/javascript" src="../folder_jquery/users.js"></script>
-
        {% endblock%}<br /><br />
-<footer>
+
+
+<footer >
              <div  class="container footer">
                 <div class= "row footer">
-{#                  <div id="imagetop">#}
-{#                     <ul class="list-inline text-center">#}
-{#                        <li><marquee href="#"><img src="/assets/imag24.png" alt="responsive" class="img-circle"></marquee></li>#}
-{#                         <li><marquee href="#"><img src="/assets/imag16.png" alt="responsive" class="img-circle"></marquee></li>#}
-{#                        <li><marquee href="#"><img src="/assets/imag18.png" alt="responsive" class="img-circle"></marquee></li>#}
-{#                     </ul>#}
-{#                </div>#}
+                  <div id="imagetop">
+                     <ul class="list-inline">
+                        <li><marquee href="#"><img src="{% static "imag24.png" %}" alt="responsive" class="img-circle"></marquee></li>
+                         <li><marquee href="#"><img src="{% static "imag16.png" %}" alt="responsive" class="img-circle"></marquee></li>
+                        <li><marquee href="#"><img src="{% static "imag18.png" %}" alt="responsive" class="img-circle"></marquee></li>
+                     </ul>
+                </div>
 
                 <div>
                         <ul class="col-xs-3>
@@ -100,8 +125,8 @@
  </div> <!-- container footer-->
 </footer>
 {#      <script type="text/javascript" src="{% static "../folder_jquery/Jquery-3.5.1.min.js" %}"></script>#}
-{#      <script type="text/javascript" src="../folder_jquery/"></script>   <!-- JAVASCRIPT HERE -->                         <!-- JQUERY HERE -->#}
-
-
+       <script type="text/javascript" src="../folder_jquery/Jquery-3.5.1.min.js"></script>   <!-- JAVASCRIPT HERE -->
+{#       <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> <!-- JQUERY HERE -->#}
+       <script type="text/javascript" src="../folder_jquery/users.js"></script>                   <!-- MY FILE JQUERY HERE -->
  </body>
 </html>

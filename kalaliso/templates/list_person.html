@@ -1,0 +1,28 @@
+{% extends 'folders_html/base.html' %}
+
+{#{% block title %}Persons for {{ name }}{% endblock %}#}
+{#{% block content %}#}
+{#<h1>Persons for {{ name }}</h1>#}
+{#{% for person in list_persons %}#}
+{#<p>{{ person.name }}</p>#}
+{#<p>By {{ person.full_name }}</p>#}
+{#<p>Published {{ article.pub_date|date:"F j, Y" }}</p>#}
+{#{% endfor %}#}
+{#{% endblock %}#}
+
+
+{% block content %}
+    <h3 class="text-center">TABLEAU DE BORD DES CLIENTS</h3>
+    <form action="{% url 'list_personnes' %}" method="post">
+        {% csrf_token %}
+            <table>
+               {{ form.as_table }}
+            </table><br />
+        <input type="submit" value="Submit" class="btn btn-primary">
+        <input type="submit" value="Edit" class="btn btn-dark">
+        <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
+{#    <script type="text/javascript" src="{% staticfiles '' %}"></script>#}
+
+{% endblock %}
+

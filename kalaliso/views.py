@@ -57,11 +57,26 @@ def get_form_data(request):
             data = Person(status=sta, prenom=pre, nom=no, sex=se, contact_1=cont, email=ema)
             data.save()
 
+       # if form.is_valid():
+       #       sta = form.cleaned_data['status']
+       #       se = form.cleaned_data['sex']
+       #       pre = form.cleaned_data["prenom"]
+       #       pre = form.cleaned_data["prenom"]
+       #       no = form.cleaned_data["nom"]
+       #       cont = form.cleaned_data["contact_1"]
+       #       ema = form.cleaned_data["email"]
 
             return HttpResponseRedirect(reverse('thanks'))
     else:
        form = PersonForm()
     return render(request, '../templates/form.html', {'form':form})
+
+def list_person(request):
+     model = Person
+     list_p = Person.objects.all()
+
+# context = {'year': year, 'article_list': a_list}
+     return render(request, '../templates/list_person.html')
 
 
 # def merci(request):

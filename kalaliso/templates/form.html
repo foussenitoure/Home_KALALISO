@@ -1,7 +1,7 @@
 {% extends 'folders_html/base.html' %}
 
 {% block content %}
-    <h2>REGISTER CLIENT</h2>
+    <h2 class="text-center">REGISTER CLIENT</h2>
     <form action="{% url 'get-form-data' %}" method="post">
         {% csrf_token %}
             <table>
