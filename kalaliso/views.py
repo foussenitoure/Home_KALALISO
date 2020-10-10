@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from kalaliso.models import Person
 # Mesure
-from kalaliso.form import PersonForm
+# from kalaliso.form import PersonForm
 # MesureForm
 
 
@@ -66,10 +66,10 @@ def get_form_data(request):
        #       cont = form.cleaned_data["contact_1"]
        #       ema = form.cleaned_data["email"]
 
-            return HttpResponseRedirect(reverse('thanks'))
-    else:
-       form = PersonForm()
-    return render(request, '../templates/form.html', {'form':form})
+    #         return HttpResponseRedirect(reverse('thanks'))
+    # else:
+    #    form = PersonForm()
+    # return render(request, '../templates/form.html', {'form':form})
 
 def list_person(request):
      model = Person

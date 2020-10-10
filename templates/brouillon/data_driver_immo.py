@@ -2,6 +2,9 @@ from django.db import models
 
 # Create your models here.
 
+
+# ===============     MODELISATION DATABASE DRIVER    ============
+
 # class Person(models.Model):
 #     STATUS = (
 #             ('Customer', 'CUSTOMER'),
@@ -42,3 +45,6 @@ from django.db import models
 
 #     def __str__(self):
 #         return
+
+
+# ===============     MODELISATION DATABASE IMMOBILIERE    ============
