@@ -16,7 +16,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models.base import ModelBase
 from django.views.decorators.cache import never_cache
-from django.contrib.gis.db import models
+# from django.contrib.gis.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.timezone import utc
