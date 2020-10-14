@@ -26,7 +26,7 @@ SECRET_KEY = '1&-+9^&5htao6z_%+(-2%_1u#*st5ui%6&y&rm^(^qk#tq(r2t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['198.211.109.66']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'django.contrib.gis',
     'kalaliso.apps.KalalisoConfig',
+    # 'kalaliso.apps.SuitConfig',
 
 ]
 
@@ -131,3 +132,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
 # GDAL_LIBRARY_PATH = r'C:\OSGeo4W64\bin\gdal202'
+
+
+from Home_KALALISO.local_settings import *
