@@ -18,8 +18,9 @@ from django.conf.urls import url
 from kalaliso import views
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    url(r'^$', views.look, name='home'),
+    url(r'', admin.site.urls),
+    # url('admin/', admin.site.urls),
+    # url(r'^$', views.look, name='home'),
     url(r'^home/$', views.look, name='home'),
     url(r'^index/$', views.indexpage, name='indexpage'),
     # url(r'', views.indexpage, name='indexpage'),

@@ -26,7 +26,7 @@ import datetime
 import sys
 
 class Person(models.Model):
-
+    # image = models.ImageField(upload_to='photos/profil%Y/%m/%d', null=True, blank=True, verbose_name='Photo_commande')
     STATUS = (
         ('Client', 'CLIENT'),
         ('Ouvrier', 'OUVRIER'),
@@ -45,46 +45,50 @@ class Person(models.Model):
         ('M', 'Moyenne'),
         ('P', 'Petite'),
     )
-    sex = models.CharField(max_length=20, choices=SEX, default='Homme')
-    prenom = models.CharField(max_length=30)
-    nom = models.CharField(max_length=30)
-    contact_1 = models.IntegerField(primary_key=True)
-    email = models.EmailField(max_length=100, null=True, blank=True)
-    categorie = models.CharField(max_length=20, choices=CATEGORIE, default='Grande')
-    domicile = models.CharField(max_length=30, null=True, blank=True, default='Lafiabougou')
-    alias = models.CharField(verbose_name='alias', max_length=30, null=True, blank=True)
-    profession = models.CharField(max_length=30, null=True, blank=True)
-    contact_2 = models.CharField(max_length=20, null=True, blank=True)
-    date_naissance = models.DateField()
-    nationalite = models.CharField(max_length=30, null=True, blank=True)
-    tutuelle = models.CharField(max_length=30, null=True, blank=True)
+    sex              = models.CharField(max_length=20, choices=SEX, default='Homme')
+    prenom           = models.CharField(max_length=30, null=True, blank=True)
+    nom              = models.CharField(max_length=30, null=True, blank=True)
+    contact_1        = models.IntegerField(primary_key=True)
+    email            = models.EmailField(max_length=100, null=True, blank=True)
+    categorie        = models.CharField(max_length=20, choices=CATEGORIE, default='Grande')
+    domicile         = models.CharField(max_length=30, null=True, blank=True, default='Lafiabougou')
+    alias            = models.CharField(verbose_name='alias', max_length=30, null=True, blank=True)
+    profession       = models.CharField(max_length=30, null=True, blank=True)
+    contact_2        = models.CharField(max_length=20, null=True, blank=True)
+    date_naissance   = models.DateField(auto_now_add=True)
+    nationalite      = models.CharField(max_length=30, null=True, blank=True)
+    tutuelle         = models.CharField(max_length=30, null=True, blank=True)
     telephonique_fix = models.CharField(max_length=30, null=True, blank=True)
     numero_reference = models.PositiveIntegerField(null=True, blank=True)
-    nina = models.PositiveIntegerField(null=True, blank=True)
+    nina             = models.PositiveIntegerField(null=True, blank=True)
+    # create_at        =  models.DateTimeField(auto_now_add=True)
+    # update_at        = models.DateTimeField(auto_now_add=False)
 
     def __str__(self):
         return'{}{}'.format(self.prenom, self.nom)
 
 
 class Mesure(models.Model):
-    person = models.OneToOneField('Person', on_delete=models.CASCADE, verbose_name='Nom client',)
-    coude = models.FloatField()
-    epaule = models.FloatField()
-    manche = models.FloatField(null=True, blank=True)
-    tour_manche = models.FloatField(null=True, blank=True)
-    taille = models.FloatField(null=True, blank=True)
-    poitrine = models.FloatField(null=True, blank=True)
+    person          = models.OneToOneField('Person', on_delete=models.CASCADE, verbose_name='Nom client',)
+    coude           = models.FloatField()
+    epaule          = models.FloatField()
+    manche          = models.FloatField(null=True, blank=True)
+    tour_manche     = models.FloatField(null=True, blank=True)
+    taille          = models.FloatField(null=True, blank=True)
+    poitrine        = models.FloatField(null=True, blank=True)
     longueur_boubou = models.FloatField(null=True, blank=True)
     longueur_patanlon = models.FloatField(null=True, blank=True)
-    fesse = models.FloatField(null=True, blank=True)
-    ceinture = models.FloatField(null=True, blank=True)
-    cuisse = models.FloatField(null=True, blank=True)
-    patte = models.FloatField(null=True, blank=True)
+    fesse           = models.FloatField(null=True, blank=True)
+    ceinture        = models.FloatField(null=True, blank=True)
+    cuisse          = models.FloatField(null=True, blank=True)
+    patte           = models.FloatField(null=True, blank=True)
+    create_at       =  models.DateTimeField(auto_now_add=True)
+    update_at       = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return'{}'.format(self.person)
 class Produit(models.Model):
-    PRODUIT = (
+    PRODUIT         = (
         ('Boubou', 'Boubou'),
         ('Grand Boubou', 'Grand Boubou'),
         ('Chemise Complet', 'Chemise Complet'),
@@ -98,20 +102,21 @@ class Produit(models.Model):
         ('Tenu Securite', 'Tenu Securite'),
         ('AUTRES', 'AUTRES'),)
 
-    produit = models.CharField(max_length=25, primary_key=True, choices=PRODUIT, default='Boubou')
+    produit         = models.CharField(max_length=25, primary_key=True, choices=PRODUIT, default='Boubou')
     def __str__(self):
         return'{}'.format(self.produit)
 
 class Commande(models.Model):
-    produit_command = models.ManyToManyField('Produit')
-    image = models.ImageField(upload_to='photos/%Y/%m/%d', null=True, blank=True, verbose_name= 'Photo_commande')
-    COUTURE = (
+    products        = models.ManyToManyField('Produit', verbose_name='list_commande')
+    # mesure_client   = models.ForeignKey('Mesure', on_delete=models.CASCADE, verbose_name='Mesure_Clients',)
+    image           = models.ImageField(upload_to='photos/modele%Y/%m/%d', null=True, blank=True, verbose_name= 'Photo_commande')
+    COUTURE         = (
         ('BRODERIE', 'Broderie'),
         ('COUTURE SIMPLE', 'Couture simple'),
         ('COUTURE A MAIN', 'Couture a main'),
         ('REPARATION', 'Reparation'),)
     couture = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
-    TISSU = (
+    TISSU           = (
         ('BAZIN GETZNER', 'BAZIN GETZNER'),
         ('BAZIN RICHE', 'BAZIN RICHE'),
         ('BAZIN MOYEN', 'BAZIN MOYEN'),
@@ -123,8 +128,8 @@ class Commande(models.Model):
         ('VOILE', 'VOILE'),
         ('BOGOLAN', 'BOGOLAN'),
         ('AUTRES', 'AUTRES'), )
-    tissu = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
-    COULOIR = (
+    tissu           = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
+    COULOIR         = (
         ('BLANCHE', 'BLANCHE'),
         ('ROUGE SANG', 'ROUGE SANG'),
         ('BLEU', 'BLEU'),
@@ -144,19 +149,20 @@ class Commande(models.Model):
         ('BAGA CLAIR', 'BAGA CLAIR'),
         ('DEUX TONS', 'DEUX TONS'),
         ('MULTICOLOR', 'MULTICOLOR'), )
-    couloir = models.CharField(max_length=25, choices=COULOIR, default='BLANCHE')
-    command_person = models.ForeignKey('Person',  on_delete=models.CASCADE, verbose_name='Titulaire command',)
+    couloir         = models.CharField(max_length=25, choices=COULOIR, default='BLANCHE')
+    command_person  = models.ForeignKey('Person',  on_delete=models.CASCADE, verbose_name='Titulaire command',)
     # produit = models.ManyToManyField('Produit', verbose_name='Nouveau produit',)
-    quantite = models.PositiveSmallIntegerField()
-    metrage = models.FloatField()
-    prix_unitaire = models.FloatField()
-    montant_total = models.FloatField()
-    avance = models.FloatField()
-    reliquat = models.FloatField()
-    remise = models.FloatField(default=0)
-    reception = models.DateTimeField(auto_now_add=True)
-    rendez_vous = models.DateField()
-    livre = models.BooleanField(default=False)
+    quantite        = models.PositiveSmallIntegerField()
+    metrage         = models.FloatField()
+    price           = models.FloatField()
+    sub_price       = models.FloatField()
+    montant_total   = models.FloatField()
+    avance          = models.FloatField()
+    reliquat        = models.FloatField()
+    remise          = models.FloatField(default=0)
+    reception       = models.DateTimeField(auto_now_add=True)
+    rendez_vous     = models.DateField()
+    livre           = models.BooleanField(default=False)
 
     def __str__(self):
         return'{}'.format(self.id)
@@ -164,13 +170,7 @@ class Commande(models.Model):
     # class Meta:
     #       ordering = ('reception',)
 
-
-
     # created_at = models.DateField(auto_now_add=True)
-
-
-
-
 
 # @python_2_unicode_compatible
 
