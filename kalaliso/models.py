@@ -87,6 +87,7 @@ class Mesure(models.Model):
 
     def __str__(self):
         return'{}'.format(self.person)
+
 class Produit(models.Model):
     PRODUIT         = (
         ('Boubou', 'Boubou'),
@@ -102,70 +103,81 @@ class Produit(models.Model):
         ('Tenu Securite', 'Tenu Securite'),
         ('AUTRES', 'AUTRES'),)
 
-    produit         = models.CharField(max_length=25, primary_key=True, choices=PRODUIT, default='Boubou')
+    produit         = models.CharField(max_length=25, choices=PRODUIT, default='Boubou')
     def __str__(self):
         return'{}'.format(self.produit)
 
-class Commande(models.Model):
-    products        = models.ManyToManyField('Produit', verbose_name='list_commande')
-    # mesure_client   = models.ForeignKey('Mesure', on_delete=models.CASCADE, verbose_name='Mesure_Clients',)
-    image           = models.ImageField(upload_to='photos/modele%Y/%m/%d', null=True, blank=True, verbose_name= 'Photo_commande')
-    COUTURE         = (
-        ('BRODERIE', 'Broderie'),
-        ('COUTURE SIMPLE', 'Couture simple'),
-        ('COUTURE A MAIN', 'Couture a main'),
-        ('REPARATION', 'Reparation'),)
-    couture = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
-    TISSU           = (
-        ('BAZIN GETZNER', 'BAZIN GETZNER'),
-        ('BAZIN RICHE', 'BAZIN RICHE'),
-        ('BAZIN MOYEN', 'BAZIN MOYEN'),
-        ('WAX', 'WAX'),
-        ('TISSU', 'TISSU'),
-        ('LEGER', 'LEGER'),
-        ('BRODE', 'BRODE'),
-        ('PERCALE', 'PERCALE'),
-        ('VOILE', 'VOILE'),
-        ('BOGOLAN', 'BOGOLAN'),
-        ('AUTRES', 'AUTRES'), )
-    tissu           = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
-    COULOIR         = (
-        ('BLANCHE', 'BLANCHE'),
-        ('ROUGE SANG', 'ROUGE SANG'),
-        ('BLEU', 'BLEU'),
-        ('ORANGE', 'ORANGE'),
-        ('ROSE', 'ROSE'),
-        ('VERT', 'VERT'),
-        ('GRIS', 'GRIS'),
-        ('GRIS CLAIR', 'GRIS CLAIR'),
-        ('VIOLET', 'VIOLET'),
-        ('MARON', 'MARON'),
-        ('MARON CLAIR', 'MARON CLAIR'),
-        ('TURGUOISE', 'TURGUOISE'),
-        ('JAUNE', 'JAUNE'),
-        ('JAUNE COUSIN', 'JAUNE COUSIN'),
-        ('NOIR', 'NOIR'),
-        ('BAGA', 'BAGA'),
-        ('BAGA CLAIR', 'BAGA CLAIR'),
-        ('DEUX TONS', 'DEUX TONS'),
-        ('MULTICOLOR', 'MULTICOLOR'), )
-    couloir         = models.CharField(max_length=25, choices=COULOIR, default='BLANCHE')
-    command_person  = models.ForeignKey('Person',  on_delete=models.CASCADE, verbose_name='Titulaire command',)
-    # produit = models.ManyToManyField('Produit', verbose_name='Nouveau produit',)
-    quantite        = models.PositiveSmallIntegerField()
-    metrage         = models.FloatField()
-    price           = models.FloatField()
-    sub_price       = models.FloatField()
-    montant_total   = models.FloatField()
-    avance          = models.FloatField()
-    reliquat        = models.FloatField()
-    remise          = models.FloatField(default=0)
+class Orders(models.Model):
+    command_person  = models.ForeignKey('Person', on_delete=models.CASCADE, verbose_name='Titulaire command', )
+    # products        = models.ManyToManyField('Produit', verbose_name='list_commande')
     reception       = models.DateTimeField(auto_now_add=True)
-    rendez_vous     = models.DateField()
+    rendez_vous     = models.DateTimeField(auto_now_add=False)
     livre           = models.BooleanField(default=False)
+    create_at       =  models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return'{}'.format(self.id)
+
+class Items_Orders(models.Model):
+        orders   = models.ForeignKey('Orders', on_delete=models.DO_NOTHING)
+        products = models.ManyToManyField('Produit', verbose_name='list_commande')
+        image = models.ImageField(upload_to='photos/modele/%Y/%m/%d', null=True, blank=True, verbose_name='Photo_commande')
+        COUTURE = (
+            ('BRODERIE', 'Broderie'),
+            ('COUTURE SIMPLE', 'Couture simple'),
+            ('COUTURE A MAIN', 'Couture a main'),
+            ('REPARATION', 'Reparation'),)
+        couture = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
+        TISSU = (
+            ('BAZIN GETZNER', 'BAZIN GETZNER'),
+            ('BAZIN RICHE', 'BAZIN RICHE'),
+            ('BAZIN MOYEN', 'BAZIN MOYEN'),
+            ('WAX', 'WAX'),
+            ('TISSU', 'TISSU'),
+            ('LEGER', 'LEGER'),
+            ('BRODE', 'BRODE'),
+            ('PERCALE', 'PERCALE'),
+            ('VOILE', 'VOILE'),
+            ('BOGOLAN', 'BOGOLAN'),
+            ('AUTRES', 'AUTRES'),)
+        tissu = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
+        COULOIR = (
+            ('BLANCHE', 'BLANCHE'),
+            ('ROUGE SANG', 'ROUGE SANG'),
+            ('BLEU', 'BLEU'),
+            ('ORANGE', 'ORANGE'),
+            ('ROSE', 'ROSE'),
+            ('VERT', 'VERT'),
+            ('GRIS', 'GRIS'),
+            ('GRIS CLAIR', 'GRIS CLAIR'),
+            ('VIOLET', 'VIOLET'),
+            ('MARON', 'MARON'),
+            ('MARON CLAIR', 'MARON CLAIR'),
+            ('TURGUOISE', 'TURGUOISE'),
+            ('JAUNE', 'JAUNE'),
+            ('JAUNE COUSIN', 'JAUNE COUSIN'),
+            ('NOIR', 'NOIR'),
+            ('BAGA', 'BAGA'),
+            ('BAGA CLAIR', 'BAGA CLAIR'),
+            ('DEUX TONS', 'DEUX TONS'),
+            ('MULTICOLOR', 'MULTICOLOR'),)
+        couloir = models.CharField(max_length=25, choices=COULOIR, default='BLANCHE')
+        quantite = models.PositiveSmallIntegerField()
+        metrage = models.FloatField()
+        price = models.FloatField()
+        # sub_price = models.FloatField()
+        montant_total = models.FloatField()
+        avance = models.FloatField()
+        reliquat = models.FloatField()
+        remise = models.FloatField(default=0)
+
+        class Meta:
+            ordering = ["id"]
+
+        def __str__(self):
+            return '{}'.format(self.orders)
+
 
     # class Meta:
     #       ordering = ('reception',)

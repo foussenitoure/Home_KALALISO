@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 from django.conf import settings
+# from suit import DjangoSuitConfig
 from pathlib import Path
 import os
 
@@ -32,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'suit',
     # 'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     # 'django.contrib.gis',
     'kalaliso.apps.KalalisoConfig',
     # 'kalaliso.apps.SuitConfig',
+
+
 
 ]
 
@@ -130,8 +134,29 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
-# GDAL_LIBRARY_PATH = r'C:\OSGeo4W64\bin\gdal202'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 from Home_KALALISO.local_settings import *
+
+
+# TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+#     'django.core.context_processors.request',
+# )
+
+# SUIT_CONFIG = {
+#     'ADMIN_NAME': 'KALALISO COUTURE',
+#     'SHOW_REQUIRED_ASTERISK': True,
+#     'MENU_ICONS': {
+#     'sites': 'icon-leaf',
+#     'auth': 'icon-lock',
+#     'kalaliso': 'icon-th-list',
+#     # 'commandes': 'icon-th-list',
+#     # 'depenses': 'icon-th-list',
+#     # 'mesures': 'icon-th-list',
+#     # 'Person': 'icon-user',
+#     # 'produits': 'icon-th-list',
+#     }
+#
+# }
