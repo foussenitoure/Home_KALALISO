@@ -5,7 +5,7 @@ from django.contrib import auth
 from django import forms
 from django.utils import timezone
 # from suit.admin import SortableTabularInline
-from kalaliso.models import Person, Mesure, Orders, Produit, Items_Orders
+from kalaliso.models import Person, Depense, ItemsDepense,  Mesure, Orders, Produit, ItemsOrders
 
 
 
@@ -87,7 +87,10 @@ admin.site.register(Produit, ProduitAdmin)
 class MesureAdmin(admin.ModelAdmin):
     save_on_top = True
     models = Mesure
-    fields = ['person',
+    fields = [
+              'person_mesure',
+              'mesure_modele',
+              'mesure_client',
               'coude',
               'epaule',
               'manche',
@@ -105,7 +108,8 @@ class MesureAdmin(admin.ModelAdmin):
                'update_at',]
 
     list_display = (
-                'person',
+                'person_mesure',
+                'mesure_modele',
                 'coude',
                 'epaule',
                 'manche',
@@ -127,6 +131,7 @@ class OrdersAdmin(admin.ModelAdmin):
     models = Orders
     fields = [
                'command_person',
+               'montant_total',
                # 'products',
                'rendez_vous',
                # 'create_at',
@@ -140,6 +145,7 @@ class OrdersAdmin(admin.ModelAdmin):
 
     list_display = (
                'command_person',
+               'montant_total',
                # 'products',
                'rendez_vous',
                # 'reception',
@@ -154,13 +160,13 @@ class OrdersAdmin(admin.ModelAdmin):
 admin.site.register(Orders, OrdersAdmin)
 
 
-class Items_OrdersAdmin(admin.ModelAdmin):
+class ItemsOrdersAdmin(admin.ModelAdmin):
     save_on_top = True
-    models = Items_Orders
+    models = ItemsOrders
     fields = [
-              # 'command_person',
-              'orders',
-              # 'products',
+              #'command_person',
+               'orders',
+              #'products',
                'image',
                'quantite',
                'couture',
@@ -172,7 +178,6 @@ class Items_OrdersAdmin(admin.ModelAdmin):
                'avance',
                'reliquat',
                #'remise',
-               'montant_total',
                #'rendez_vous',
 
                ]
@@ -197,7 +202,7 @@ class Items_OrdersAdmin(admin.ModelAdmin):
                      'avance',
                      'reliquat',
                      # 'remise',
-                     'montant_total',
+                     # 'montant_total',
                      # 'rendez_vous',
                      # 'livre',
                      )
@@ -206,41 +211,84 @@ class Items_OrdersAdmin(admin.ModelAdmin):
 
     list_filter = []
     search_fields = []
-admin.site.register(Items_Orders, Items_OrdersAdmin)
+admin.site.register(ItemsOrders, ItemsOrdersAdmin)
 
 
-# class DepenseAdmin(admin.ModelAdmin):
-#     save_on_top = True
-#     models = Depense
-#     fields = ['mode_depense',
-#               'titulaire_depense',
-#               'acquisiteur',
-#               'quantite',
-#               'prix_unitaire',
-#               'is_valide',
-#               'montant',
-#               'justificatif',
-#               'created_at',
-#
-#               ]
-#
-#     # exclude = ['created_at',]
-#
-#     list_display = ('mode_depense',
-#                     'titulaire_depense',
-#                     'acquisiteur',
-#                     'quantite',
-#                     'prix_unitaire',
-#                     'montant',
-#                     'justificatif',
-#                     'is_valide',
-#                     'created_at',
-#                     )
-#
-#     ordering = ['created_at',]
-#     list_filter = ['acquisiteur',]
-#     search_fields = ['acquisiteur', 'is_valide',]
-# admin.site.register(Depense, DepenseAdmin)
+class DepenseAdmin(admin.ModelAdmin):
+    # save_on_top = True
+    models = Depense
+    fields = [
+              'titulaire_depense',
+              'montant_total',
+              'is_valide',
+              # 'created_at',
+
+              ]
+
+    exclude = ['created_at',]
+
+    list_display = (
+                    'titulaire_depense',
+                    'montant_total',
+                    'is_valide',
+                    # 'created_at',
+                    )
+
+    ordering = ['created_at',]
+    list_filter = ['created_at',]
+    search_fields = []
+admin.site.register(Depense, DepenseAdmin)
+
+class ItemsDepenseAdmin(admin.ModelAdmin):
+    save_on_top = True
+    models = ItemsDepense
+    fields = [
+              'type_depense',
+              'type_materiel',
+              'quantite',
+              'prix_unitaire',
+              'montant_unitaire',
+              'description',
+              # 'created_at',
+
+              ]
+
+    exclude = ['created_at',]
+
+    list_display = (
+                    'type_depense',
+                    'type_materiel',
+                    # 'titulaire_depense',
+                    'quantite',
+                    'prix_unitaire',
+                    'montant_unitaire',
+                    'description',
+                    # 'created_at',
+                    )
+
+    ordering = ['created_at',]
+    list_filter = ['description']
+    search_fields = []
+admin.site.register(ItemsDepense, ItemsDepenseAdmin)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #
 #
 # class VenteAdmin(admin.ModelAdmin):

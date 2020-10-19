@@ -65,13 +65,29 @@ class Person(models.Model):
     # update_at        = models.DateTimeField(auto_now_add=False)
 
     def __str__(self):
-        return'{}{}'.format(self.prenom, self.nom)
+        return'{} {} {}'.format(self.prenom, self.nom, self.contact_1)
 
 
 class Mesure(models.Model):
-    person          = models.OneToOneField('Person', on_delete=models.CASCADE, verbose_name='Nom client',)
-    coude           = models.FloatField()
-    epaule          = models.FloatField()
+    MESURE_MODELE  = (
+        ('Boubou', 'Boubou'),
+        ('Grand Boubou', 'Grand Boubou'),
+        ('Chemise Complet', 'Chemise Complet'),
+        ('Chemise Manche Long', 'Chemise Manche Long'),
+        ('Chemise Manche Court', 'Chemise Manche Court'),
+        ('Pagne Jupe', 'Pagne Jupe'),
+        ('Pagne Complet', 'Pagne Complet'),
+        ('Pagne Maniere', 'Pagne Maniere'),
+        ('Patanlon', 'Patanlon'),
+        ('Tenu Scolaire', 'Tenu Scolaire'),
+        ('Tenu Securite', 'Tenu Securite'),)
+
+    mesure_modele   = models.CharField(max_length=50, primary_key=True, choices=MESURE_MODELE, default='Boubou')
+    person_mesure   = models.ForeignKey('Person', on_delete=models.CASCADE, verbose_name='Client')
+    mesure_client   = models.ManyToManyField('Produit', verbose_name='Mesure Par Produit')
+    # person          = models.ManyToManyField('Person')
+    coude           = models.FloatField(null=True, blank=True)
+    epaule          = models.FloatField(null=True, blank=True)
     manche          = models.FloatField(null=True, blank=True)
     tour_manche     = models.FloatField(null=True, blank=True)
     taille          = models.FloatField(null=True, blank=True)
@@ -86,7 +102,7 @@ class Mesure(models.Model):
     update_at       = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return'{}'.format(self.person)
+        return'{}'.format(self.person_mesure)
 
 class Produit(models.Model):
     PRODUIT         = (
@@ -104,6 +120,7 @@ class Produit(models.Model):
         ('AUTRES', 'AUTRES'),)
 
     produit         = models.CharField(max_length=25, choices=PRODUIT, default='Boubou')
+
     def __str__(self):
         return'{}'.format(self.produit)
 
@@ -111,6 +128,7 @@ class Orders(models.Model):
     command_person  = models.ForeignKey('Person', on_delete=models.CASCADE, verbose_name='Titulaire command', )
     # products        = models.ManyToManyField('Produit', verbose_name='list_commande')
     reception       = models.DateTimeField(auto_now_add=True)
+    montant_total = models.FloatField(null=True, blank=True)
     rendez_vous     = models.DateTimeField(auto_now_add=False)
     livre           = models.BooleanField(default=False)
     create_at       =  models.DateTimeField(auto_now_add=True)
@@ -119,17 +137,17 @@ class Orders(models.Model):
     def __str__(self):
         return'{}'.format(self.id)
 
-class Items_Orders(models.Model):
-        orders   = models.ForeignKey('Orders', on_delete=models.DO_NOTHING)
-        products = models.ManyToManyField('Produit', verbose_name='list_commande')
-        image = models.ImageField(upload_to='photos/modele/%Y/%m/%d', null=True, blank=True, verbose_name='Photo_commande')
-        COUTURE = (
+class ItemsOrders(models.Model):
+        orders      = models.ForeignKey('Orders', on_delete=models.DO_NOTHING)
+        products    = models.ManyToManyField('Produit', verbose_name='list_commande')
+        image       = models.ImageField(upload_to='photos/modele/%Y/%m/%d', null=True, blank=True, verbose_name='Photo_commande')
+        COUTURE     = (
             ('BRODERIE', 'Broderie'),
             ('COUTURE SIMPLE', 'Couture simple'),
             ('COUTURE A MAIN', 'Couture a main'),
             ('REPARATION', 'Reparation'),)
-        couture = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
-        TISSU = (
+        couture     = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
+        TISSU       = (
             ('BAZIN GETZNER', 'BAZIN GETZNER'),
             ('BAZIN RICHE', 'BAZIN RICHE'),
             ('BAZIN MOYEN', 'BAZIN MOYEN'),
@@ -141,8 +159,8 @@ class Items_Orders(models.Model):
             ('VOILE', 'VOILE'),
             ('BOGOLAN', 'BOGOLAN'),
             ('AUTRES', 'AUTRES'),)
-        tissu = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
-        COULOIR = (
+        tissu       = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
+        COULOIR     = (
             ('BLANCHE', 'BLANCHE'),
             ('ROUGE SANG', 'ROUGE SANG'),
             ('BLEU', 'BLEU'),
@@ -162,21 +180,70 @@ class Items_Orders(models.Model):
             ('BAGA CLAIR', 'BAGA CLAIR'),
             ('DEUX TONS', 'DEUX TONS'),
             ('MULTICOLOR', 'MULTICOLOR'),)
-        couloir = models.CharField(max_length=25, choices=COULOIR, default='BLANCHE')
-        quantite = models.PositiveSmallIntegerField()
-        metrage = models.FloatField()
-        price = models.FloatField()
+        couloir      = models.CharField(max_length=25, choices=COULOIR, default='BLANCHE')
+        quantite     = models.PositiveSmallIntegerField()
+        metrage      = models.FloatField()
+        price        = models.FloatField()
         # sub_price = models.FloatField()
-        montant_total = models.FloatField()
-        avance = models.FloatField()
-        reliquat = models.FloatField()
-        remise = models.FloatField(default=0)
+        avance       = models.FloatField()
+        reliquat     = models.FloatField()
+        remise       = models.FloatField(default=0)
 
         class Meta:
             ordering = ["id"]
 
         def __str__(self):
             return '{}'.format(self.orders)
+
+
+
+class Depense(models.Model):
+        titulaire_depense        = models.ForeignKey('Person', on_delete=models.DO_NOTHING, verbose_name='Titulaire Depense',)
+        montant_total            = models.PositiveIntegerField(null=True, blank=True)
+        is_valide                = models.BooleanField(default=False)
+        created_at               = models.DateTimeField(auto_now_add=True)
+
+        def __str__(self):
+            return '{}'.format(self.is_valide)
+
+class ItemsDepense(models.Model):
+            MODE_DEPENSE = (
+                ('MATERIELS', 'Materiels'),
+                ('FRAIS OUVRIER', 'Frais_Ouvrier'),
+                # ('BON', 'Bon'),
+                ('LOCATION', 'Location'),
+                ('ELECTRICITE', 'Electricite'),
+                ('CONSOMMABLE', 'Consommable'),
+                ('IMPOT SYNTHETIQUE', 'Impot_synthetique'),
+                ('TAXE MUNICIPAL', 'Taxe_municipal'),
+            )
+
+            type_depense = models.CharField(max_length=30, choices=MODE_DEPENSE, default='Materiels', )
+
+            TYPE_MATERIEL       = (
+                ('FIL', 'Fil'),
+                ('AIGU', 'Aigu'),
+                ('SATIN', 'Satin'),
+                ('POPILINE', 'Popiline'),
+                ('DUPURE', 'Dupure'),
+                ('CISEAU', 'Ciseau'),
+                ('CHARBON', 'Charbon'),
+                ('COL', 'Col'),
+            )
+
+            type_materiel      = models.CharField(max_length=30, choices=TYPE_MATERIEL, default='Fil', )
+
+            quantite           = models.PositiveSmallIntegerField(default=1)
+            prix_unitaire      = models.PositiveIntegerField(null=True, blank=True)
+            montant_unitaire   = models.PositiveIntegerField(null=True, blank=True)
+            description        = models.TextField(max_length=200, null=True, blank=True)
+            created_at         = models.DateTimeField(auto_now_add=True)
+
+            def __str__(self):
+                return '{}'.format(self.description)
+
+
+
 
 
     # class Meta:
@@ -191,31 +258,7 @@ class Items_Orders(models.Model):
 
 # Table pour toutes les depenses effectuées dans l'entreprise
 # @python_2_unicode_compatible
-# class Depense(models.Model):
-#         MODE_DEPENSE = (
-#             ('MATERIELS', 'Materiels'),
-#             ('FRAIS OUVRIER','Frais_Ouvrier'),
-#             ('BON', 'Bon'),
-#             ('LOCATION', 'Location'),
-#             ('ELECTRICITE', 'Electricite'),
-#             ('CONSOMMABLE', 'Consommable'),
-#             ('IMPOT SYNTHETIQUE', 'Impot_synthetique'),
-#             ('TAXE MUNICIPAL', 'Taxe_municipal'),
-#         )
-#
-#         mode_depense = models.CharField(max_length=30, choices=MODE_DEPENSE, default='Materiels',)
-#         # categorie_depense = models.BooleanField(default=False)
-#         titulaire_depense = models.ForeignKey('Person', on_delete=models.CASCADE, verbose_name='Titulaire Depense',)
-#         # acquisiteur = models.ForeignKey('Programme', on_delete=models.CASCADE, verbose_name='Payement hebdomaiare',)
-#         quantite = models.PositiveSmallIntegerField(default=1)
-#         prix_unitaire = models.PositiveIntegerField()
-#         montant = models.PositiveIntegerField()
-#         justificatif = models.TextField(max_length=200, null=True, blank=True)
-#         is_valide = models.BooleanField(default=False)
-#         created_at = models.DateTimeField(auto_now_add=True)
-#
-#         def __str__(self):
-#             return '{}'.format(self.mode_depense)
+
 
 
 # class Programme(models.Model):
