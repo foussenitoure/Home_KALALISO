@@ -5,7 +5,7 @@ from django.contrib import auth
 from django import forms
 from django.utils import timezone
 # from suit.admin import SortableTabularInline
-from kalaliso.models import Person, Depense, ItemsDepense,  Mesure, Orders, Produit, ItemsOrders
+from kalaliso.models import Person, Depense, Depense_Detail,  Mesure, Commande, Produit, Commande_Detail
 
 
 
@@ -126,9 +126,9 @@ class MesureAdmin(admin.ModelAdmin):
     # search_fields = []
 admin.site.register(Mesure, MesureAdmin)
 
-class OrdersAdmin(admin.ModelAdmin):
+class CommandeAdmin(admin.ModelAdmin):
     save_on_top = True
-    models = Orders
+    models = Commande
     fields = [
                'command_person',
                'montant_total',
@@ -157,15 +157,15 @@ class OrdersAdmin(admin.ModelAdmin):
 
     list_filter = []
     search_fields = []
-admin.site.register(Orders, OrdersAdmin)
+admin.site.register(Commande, CommandeAdmin)
 
 
-class ItemsOrdersAdmin(admin.ModelAdmin):
+class Commande_DetailAdmin(admin.ModelAdmin):
     save_on_top = True
-    models = ItemsOrders
+    models = Commande_Detail
     fields = [
               #'command_person',
-               'orders',
+               'command',
               #'products',
                'image',
                'quantite',
@@ -189,7 +189,7 @@ class ItemsOrdersAdmin(admin.ModelAdmin):
 
     list_display = (
                      # 'command_person',
-                     'orders',
+                     'command',
                      # 'products',
                      'image',
                      'quantite',
@@ -211,7 +211,7 @@ class ItemsOrdersAdmin(admin.ModelAdmin):
 
     list_filter = []
     search_fields = []
-admin.site.register(ItemsOrders, ItemsOrdersAdmin)
+admin.site.register(Commande_Detail, Commande_DetailAdmin)
 
 
 class DepenseAdmin(admin.ModelAdmin):
@@ -239,9 +239,9 @@ class DepenseAdmin(admin.ModelAdmin):
     search_fields = []
 admin.site.register(Depense, DepenseAdmin)
 
-class ItemsDepenseAdmin(admin.ModelAdmin):
+class Depense_DetailAdmin(admin.ModelAdmin):
     save_on_top = True
-    models = ItemsDepense
+    models = Depense_Detail
     fields = [
               'type_depense',
               'type_materiel',
@@ -269,7 +269,7 @@ class ItemsDepenseAdmin(admin.ModelAdmin):
     ordering = ['created_at',]
     list_filter = ['description']
     search_fields = []
-admin.site.register(ItemsDepense, ItemsDepenseAdmin)
+admin.site.register(Depense_Detail, Depense_DetailAdmin)
 
 
 

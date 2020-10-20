@@ -124,7 +124,7 @@ class Produit(models.Model):
     def __str__(self):
         return'{}'.format(self.produit)
 
-class Orders(models.Model):
+class Commande(models.Model):
     command_person  = models.ForeignKey('Person', on_delete=models.CASCADE, verbose_name='Titulaire command', )
     # products        = models.ManyToManyField('Produit', verbose_name='list_commande')
     reception       = models.DateTimeField(auto_now_add=True)
@@ -137,8 +137,8 @@ class Orders(models.Model):
     def __str__(self):
         return'{}'.format(self.id)
 
-class ItemsOrders(models.Model):
-        orders      = models.ForeignKey('Orders', on_delete=models.DO_NOTHING)
+class Commande_Detail(models.Model):
+        command      = models.ForeignKey('Commande', on_delete=models.DO_NOTHING)
         products    = models.ManyToManyField('Produit', verbose_name='list_commande')
         image       = models.ImageField(upload_to='photos/modele/%Y/%m/%d', null=True, blank=True, verbose_name='Photo_commande')
         COUTURE     = (
@@ -193,7 +193,7 @@ class ItemsOrders(models.Model):
             ordering = ["id"]
 
         def __str__(self):
-            return '{}'.format(self.orders)
+            return '{}'.format(self.command)
 
 
 
@@ -206,7 +206,7 @@ class Depense(models.Model):
         def __str__(self):
             return '{}'.format(self.is_valide)
 
-class ItemsDepense(models.Model):
+class Depense_Detail(models.Model):
             MODE_DEPENSE = (
                 ('MATERIELS', 'Materiels'),
                 ('FRAIS OUVRIER', 'Frais_Ouvrier'),
