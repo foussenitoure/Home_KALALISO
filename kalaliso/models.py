@@ -79,6 +79,9 @@ class Mesure(models.Model):
         ('Pagne Complet', 'Pagne Complet'),
         ('Pagne Maniere', 'Pagne Maniere'),
         ('Patanlon', 'Patanlon'),
+        ('Veste complet', 'Veste Complet'),
+        ('Abacos Complet', 'Abacos Complet'),
+        ('Abacos Simple', 'Abacos Simple'),
         ('Tenu Scolaire', 'Tenu Scolaire'),
         ('Tenu Securite', 'Tenu Securite'),)
 
