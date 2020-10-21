@@ -106,13 +106,59 @@ def mesure_client(request):
     return render(request, 'folders_html/mesur.html', {'form':form})
 
 
+def depenses(request):
+    if request.method == 'POST':
+
+            mont  = request.POST.get("montant_total")
+            isv   = request.POST.get("is_valide")
+            cre  = request.POST.get("created_at")
+
+            data = Depense(montant_total=mont, is_valide=isv, created_at=cre)
+            data.save()
+            return HttpResponseRedirect(reverse('thanks'))
+    else:
+        form = DepenseForm()
+    return render(request, 'folders_html/depense.html', {'form': form})
 
 
+def new_command(request):
+    if request.method == 'POST':
+
+        recep = request.POST.get("reception")
+        mont = request.POST.get("montant_total")
+        rendv = request.POST.get("rendez_vous")
+        liv = request.POST.get("livre")
+        cre  = request.POST.get("created_at")
+
+        data = Commande(reception=recep, montant_total=mont,
+                       rendez_vous=rendv, livre=liv, created_at=cre)
+        data.save()
+        return HttpResponseRedirect(reverse('thanks for new command'))
+    else:
+        form = CommandeForm()
+    return render(request, 'folders_html/command.html', {'form': form})
 
 
+def commande_details(request):
+        if request.method == 'POST':
 
+            img  = request.POST.get("image")
+            cout = request.POST.get("couture")
+            tis  = request.POST.get("tissu")
+            col  = request.POST.get("couloir")
+            qte  = request.POST.get("quantite")
+            pri  = request.POST.get("price")
+            ava  = request.POST.get("avance")
+            rel  = request.POST.get("reliquat")
+            rem  = request.POST.get("remise")
+            cre  = request.POST.get("created_at")
 
-
-
-
-    return None
+            data = Commande_Detail(image=img, couture=cout, tissu=tis,
+                                   couloir=col, quantite=qte, price=pri,
+                                   avance=ava, reliquat=rel, remise=rem,
+                                   created_at=cre)
+            data.save()
+            return HttpResponseRedirect(reverse('thanks for new command detail'))
+        else:
+            form = Commande_DetailForm()
+        return render(request, 'folders_html/command_detail.html', {'form': form})
