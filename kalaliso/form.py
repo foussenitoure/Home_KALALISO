@@ -61,3 +61,13 @@ class MesureForm(forms.Form):
     created_at         = forms.DateTimeField()
     updated_at         = forms.DateTimeField()
 
+
+
+class DepenseForm(forms.Form):
+
+    titulaire_depense  = forms.IntegerField()
+    montant_total      = forms.IntegerField()
+    is_valide          = forms.BooleanField()
+    created_at         = forms.DateTimeField()
+
+

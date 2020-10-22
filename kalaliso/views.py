@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from kalaliso.models import Person, Mesure, Produit, Commande, Commande_Detail, Depense, Depense_Detail
-from kalaliso.form import PersonForm, MesureForm
+from kalaliso.form import PersonForm, MesureForm, DepenseForm
 
 
 # Create your views here.
@@ -64,17 +64,17 @@ def get_form_data(request):
        #       cont = form.cleaned_data["contact_1"]
        #       ema = form.cleaned_data["email"]
 
-    #         return HttpResponseRedirect(reverse('thanks'))
-    # else:
-    #    form = PersonForm()
-    # return render(request, '../templates/form.html', {'form':form})
+            return HttpResponseRedirect(reverse('thanks'))
+    else:
+       form = PersonForm()
+    return render(request, '../templates/form.html', {'form':form})
 
-def list_person(request):
-     model = Person
-     list_p = Person.objects.all()
-
-     # context = {'year': year, 'article_list': a_list}
-     return render(request, '../templates/list_person.html')
+# def list_person(request):
+#      model = Person
+#      list_p = Person.objects.all()
+#
+#      # context = {'year': year, 'article_list': a_list}
+#      return render(request, '../templates/list_person.html')
 
 
 # def merci(request):
@@ -109,3 +109,19 @@ def mesure_client(request):
        form = MesureForm()
     return render(request, 'folders_html/mesur.html', {'form':form})
 
+
+def depenses(request):
+    if request.method == 'POST':
+        titu = request.POST.get("titulaire_depense")
+        mont = request.POST.get("montant_total")
+        crea = request.POST.get("created_at")
+        isv = request.POST.get("is_valide")
+
+        data = Depense(titulaire_depenser=titu, montant_total=mont,
+                   created_at=crea, is_valide=isv)
+        data.save()
+        return HttpResponseRedirect(reverse('merci pour l''ajout depense'))
+
+    else:
+            form = DepenseForm()
+            return render(request, 'folders_html/depense.html', {'form': form})
