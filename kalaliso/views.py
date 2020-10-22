@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from kalaliso.models import Person, Mesure, Produit, Commande, Commande_Detail, Depense, Depense_Detail
-from kalaliso.form import PersonForm, MesureForm, DepenseForm
+from kalaliso.form import PersonForm, MesureForm, DepenseForm, CommandeForm, Commande_DetailForm
 
 
 # Create your views here.
@@ -125,3 +125,58 @@ def depenses(request):
     else:
             form = DepenseForm()
             return render(request, 'folders_html/depense.html', {'form': form})
+
+
+def new_command(request):
+    if request.method == 'POST':
+        recep = request.POST.get("reception")
+        monT = request.POST.get("montant_total")
+        rdv = request.POST.get("rendez_vous")
+        lvr = request.POST.get("livre")
+        crea = request.POST.get("created_at")
+
+        data = Commande(reception=recep, montant_total=monT, rendez_vous=rdv,
+                          livre=lvr, create_at=crea)
+        data.save()
+
+        return HttpResponseRedirect(reverse('thanks for new command'))
+
+    else:
+        form = CommandeForm()
+        return render(request, 'folders_html/command.html', {'form': form})
+
+
+def commande_details(request):
+    if request.method == 'POST':
+        img = request.POST.get("image")
+        cout = request.POST.get("couture")
+        tis = request.POST.get("couloir")
+        qte = request.POST.get("quantite")
+        met = request.POST.get("metrage")
+        prc = request.POST.get("price")
+        ava = request.POST.get("avance")
+        reliq = request.POST.get("reliquat")
+        rem = request.POST.get("remise")
+
+
+        data = Commande_Detail(image=img, couture=cout, tissu=tis,
+                               quantite=qte, metrage=met, price=prc,
+                               avance=ava, reliquat=reliq, remise=rem)
+
+        data.save()
+
+        return HttpResponseRedirect(reverse('views details command'))
+
+    else:
+        form = Commande_DetailForm()
+        return render(request, 'folders_html/command_detail.html', {'form': form})
+
+
+
+
+
+
+
+
+
+    return None

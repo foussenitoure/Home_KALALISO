@@ -2,7 +2,7 @@ from django import forms
 
 class PersonForm(forms.Form):
 
-    STATUS = (
+    STATUS            = (
         ('Client', 'CLIENT'),
         ('Ouvrier', 'OUVRIER'),
         ('Apprenti', 'APPRENTI'),
@@ -10,24 +10,24 @@ class PersonForm(forms.Form):
         ('Company', 'COMPANY'),
     )
 
-    status = forms.ChoiceField(label='Status', choices=STATUS, required='CLIENT')
+    status             = forms.ChoiceField(label='Status', choices=STATUS, required='CLIENT')
 
-    SEX = (
+    SEX                = (
         ('H', 'Homme'),
         ('F', 'Femme'),
         ('A', 'Autres'),
     )
-    sex = forms.ChoiceField(label='Sex', choices=SEX, required='Homme')
-    prenom = forms.CharField(label='Last Name', max_length=30)
-    nom = forms.CharField(label='First Name', max_length=30)
-    contact_1 = forms.IntegerField(label='Telephone')
-    email = forms.EmailField(label='Email', max_length=100)
+    sex                = forms.ChoiceField(label='Sex', choices=SEX, required='Homme')
+    prenom             = forms.CharField(label='Last Name', max_length=30)
+    nom                = forms.CharField(label='First Name', max_length=30)
+    contact_1          = forms.IntegerField(label='Telephone')
+    email              = forms.EmailField(label='Email', max_length=100)
 
 
 
 class MesureForm(forms.Form):
 
-    MESURE_MODELE = (
+    MESURE_MODELE      = (
         ('Boubou', 'Boubou'),
         ('Grand Boubou', 'Grand Boubou'),
         ('Chemise Complet', 'Chemise Complet'),
@@ -71,3 +71,26 @@ class DepenseForm(forms.Form):
     created_at         = forms.DateTimeField()
 
 
+
+class CommandeForm(forms.Form):
+
+    command_person     = forms.IntegerField()
+    reception          = forms.IntegerField()
+    rendez_vous        = forms.DateTimeField()
+    created_at         = forms.DateTimeField()
+    livre = forms.BooleanField()
+
+
+
+class Commande_DetailForm(forms.Form):
+
+    image              = forms.ImageField()
+    couture            = forms.CharField()
+    tissu              = forms.CharField()
+    couloir            = forms.CharField()
+    quantite           = forms.IntegerField()
+    metrage            = forms.FloatField()
+    price              = forms.FloatField()
+    avance             = forms.FloatField()
+    reliquat           = forms.FloatField()
+    remise             = forms.FloatField()

@@ -144,4 +144,112 @@
 {##}
 {#        <script src=""></script>#}
 {##}
-{#            #}
+{##}
+
+
+
+{#=====   TABLE COMMANDE ====#}
+
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="utf-8">#}
+{##}
+{#</head>#}
+{#<title>KALALISO_COMMANDE</title>#}
+{##}
+{#<body class="container col-lg-10">#}
+{##}
+{#<form action="", method="post">#}
+{##}
+{##}
+{#      <table align="center" class="table table-bordered">#}
+{#          <tr>#}
+{#              <th width="200"height="50">#}
+{#                  COMMANDE CLIENT <br /><br />#}
+{#              </th>#}
+{#          </tr>#}
+{#          <tr>#}
+{#              <th width="200">#}
+{#                  <input type="text" placeholder="Produit" required name="produit">#}
+{#              </th>#}
+{#          </tr>#}
+{#          <tr>#}
+{#              <th width="200">#}
+{#                  <input type="number" placeholder="Quantite" required name="quantite">#}
+{#              </th>#}
+{#          </tr>#}
+{#          <tr>#}
+{#              <th width="200">#}
+{#                  <input type="number" placeholder="Prix_Unitaire" required name="prix_unitaire">#}
+{#              </th>#}
+{#          </tr>#}
+{#          <tr>#}
+{#              <th width="200">#}
+{#                  <input type="number" placeholder="Remise" required name="remise">#}
+{#              </th>#}
+{#          </tr>#}
+{#          <tr>#}
+{#              <th width="200">#}
+{#                  <input type="number" placeholder="Montant Total" required name="montant_total">#}
+{#              </th>#}
+{#          </tr>#}
+{#          <tr>#}
+{#                <th width="200">#}
+{#                  <input type="date" placeholder="Date_Command" required name="tour_manche">#}
+{#              </th>#}
+{#          </tr>#}
+{##}
+{#          </tr>#}
+{#          <tr>#}
+{#              <th width="200">#}
+{#                  <input type="date" placeholder="Rendez_vous" required name="rendez_vous">#}
+{#              </th>#}
+{#          </tr>#}
+{##}
+{#          <tr>#}
+{#              <th colspan="5">#}
+{#                  <button type="submit" class="btn btn-primary">Save</button>#}
+{#              </th>#}
+{#          </tr>#}
+{#      </table>#}
+{##}
+{#  </form>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+create database eco;
+create user myprojectuser WITH PASSWORD 'password';
+ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+ALTER ROLE myprojectuser SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE eco TO myprojectuser;
+
+
+
+create database immodb;
+create user myprojectuser WITH PASSWORD 'password';
+ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+ALTER ROLE myprojectuser SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE immodb TO myprojectuser;
+
+create database driverdb;
+create user myprojectuser WITH PASSWORD 'password';
+ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+ALTER ROLE myprojectuser SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE driverdb TO myprojectuser;
+
+
+
+create database Geogate;
+create user myprojectuser WITH PASSWORD 'matersgeogate';
+ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+ALTER ROLE myprojectuser SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE Geogate TO myprojectuser;
