@@ -198,8 +198,6 @@ class Commande_Detail(models.Model):
         def __str__(self):
             return '{}'.format(self.command)
 
-
-
 class Depense(models.Model):
         titulaire_depense        = models.ForeignKey('Person', on_delete=models.DO_NOTHING, verbose_name='Titulaire Depense',)
         montant_total            = models.PositiveIntegerField(null=True, blank=True)
@@ -244,9 +242,6 @@ class Depense_Detail(models.Model):
 
             def __str__(self):
                 return '{}'.format(self.description)
-
-
-
 
 
     # class Meta:

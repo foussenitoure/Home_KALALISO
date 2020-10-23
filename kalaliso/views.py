@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from kalaliso.models import Person, Mesure, Produit, Commande, Commande_Detail, Depense, Depense_Detail
-from kalaliso.form import PersonForm, MesureForm, DepenseForm, CommandeForm, Commande_DetailForm
+from kalaliso.models import Person
+# Mesure
+# from kalaliso.form import PersonForm
+# MesureForm
 
 
 # Create your views here.
@@ -64,112 +66,49 @@ def get_form_data(request):
        #       cont = form.cleaned_data["contact_1"]
        #       ema = form.cleaned_data["email"]
 
-            return HttpResponseRedirect(reverse('thanks'))
-    else:
-       form = PersonForm()
-    return render(request, '../templates/form.html', {'form':form})
+    #         return HttpResponseRedirect(reverse('thanks'))
+    # else:
+    #    form = PersonForm()
+    # return render(request, '../templates/form.html', {'form':form})
 
-# def list_person(request):
-#      model = Person
-#      list_p = Person.objects.all()
-#
-#      # context = {'year': year, 'article_list': a_list}
-#      return render(request, '../templates/list_person.html')
+def list_person(request):
+     model = Person
+     list_p = Person.objects.all()
+
+# context = {'year': year, 'article_list': a_list}
+     return render(request, '../templates/list_person.html')
 
 
 # def merci(request):
 #     return HttpResponse('Thanks, your messure had well added')
 #
-def mesure_client(request):
-    if request.method == 'POST':
-            coud  = request.POST.get("coude")
-            epau   = request.POST.get("epaule")
-            ma = request.POST.get("manche")
-            to_ma   = request.POST.get("tour_manche")
-            tail   = request.POST.get("taille")
-            poitr = request.POST.get("pointrine")
-            lo_bo = request.POST.get("longueur_boubou")
-            lo_pa = request.POST.get("longueur_patanlon")
-            fes = request.POST.get("fesse")
-            cei = request.POST.get("ceinture")
-            cui = request.POST.get("cuisse")
-            pat = request.POST.get("patte")
-            crea = request.POST.get("created_at")
-            upd = request.POST.get("update_at")
+# def mesure_data(request):
+#     if request.method == 'POST':
+#             coud  = request.POST.get("coude")
+#             epau   = request.POST.get("epaule")
+#             ma = request.POST.get("manche")
+#             to_ma   = request.POST.get("tour_manche")
+#             tail   = request.POST.get("taille")
+#             poitr = request.POST.get("pointrine")
+#             lo_bo = request.POST.get("longueur_boubou")
+#             lo_pa = request.POST.get("longueur_patanlon")
+#             fes = request.POST.get("fesse")
+#             cei = request.POST.get("ceinture")
+#             cui = request.POST.get("cuisse")
+#             pat = request.POST.get("patte")
+#
+#
+#             data = Mesure(coude=coud, epaule=epau, manche=ma,
+#                           tour_manche=to_ma, taille=tail,
+#                           poitrine=poitr, longueur_boubou=lo_bo,
+#                           longueur_patanlon=lo_pa, fesse=fes,
+#                           ceinture=cei, cuisse=cui, patte=pat,)
+#             data.save()
+#             return HttpResponseRedirect(reverse('merci'))
+#     else:
+#        form = MesureForm()
+#     return render(request, 'folders_html/mesur.html', {'form':form})
 
-
-            data = Mesure(coude=coud, epaule=epau, manche=ma,
-                          tour_manche=to_ma, taille=tail,
-                          poitrine=poitr, longueur_boubou=lo_bo,
-                          longueur_patanlon=lo_pa, fesse=fes,
-                          ceinture=cei, cuisse=cui, patte=pat, create_at=crea, update_at=upd)
-            data.save()
-            return HttpResponseRedirect(reverse('merci'))
-    else:
-       form = MesureForm()
-    return render(request, 'folders_html/mesur.html', {'form':form})
-
-
-def depenses(request):
-    if request.method == 'POST':
-        titu = request.POST.get("titulaire_depense")
-        mont = request.POST.get("montant_total")
-        crea = request.POST.get("created_at")
-        isv = request.POST.get("is_valide")
-
-        data = Depense(titulaire_depenser=titu, montant_total=mont,
-                   created_at=crea, is_valide=isv)
-        data.save()
-        return HttpResponseRedirect(reverse('merci pour l''ajout depense'))
-
-    else:
-            form = DepenseForm()
-            return render(request, 'folders_html/depense.html', {'form': form})
-
-
-def new_command(request):
-    if request.method == 'POST':
-        recep = request.POST.get("reception")
-        monT = request.POST.get("montant_total")
-        rdv = request.POST.get("rendez_vous")
-        lvr = request.POST.get("livre")
-        crea = request.POST.get("created_at")
-
-        data = Commande(reception=recep, montant_total=monT, rendez_vous=rdv,
-                          livre=lvr, create_at=crea)
-        data.save()
-
-        return HttpResponseRedirect(reverse('thanks for new command'))
-
-    else:
-        form = CommandeForm()
-        return render(request, 'folders_html/command.html', {'form': form})
-
-
-def commande_details(request):
-    if request.method == 'POST':
-        img = request.POST.get("image")
-        cout = request.POST.get("couture")
-        tis = request.POST.get("couloir")
-        qte = request.POST.get("quantite")
-        met = request.POST.get("metrage")
-        prc = request.POST.get("price")
-        ava = request.POST.get("avance")
-        reliq = request.POST.get("reliquat")
-        rem = request.POST.get("remise")
-
-
-        data = Commande_Detail(image=img, couture=cout, tissu=tis,
-                               quantite=qte, metrage=met, price=prc,
-                               avance=ava, reliquat=reliq, remise=rem)
-
-        data.save()
-
-        return HttpResponseRedirect(reverse('views details command'))
-
-    else:
-        form = Commande_DetailForm()
-        return render(request, 'folders_html/command_detail.html', {'form': form})
 
 
 
