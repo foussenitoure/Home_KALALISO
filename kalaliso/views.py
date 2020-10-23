@@ -3,7 +3,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from kalaliso.models import Person, Depense, Mesure
-from kalaliso.form import PersonForm, MesureForm
+from kalaliso.form import PersonForm, MesureForm, DepenseForm
 
 
 # Create your views here.
@@ -94,7 +94,6 @@ def mesure_client(request):
             cui = request.POST.get("cuisse")
             pat = request.POST.get("patte")
 
-
             data = Mesure(coude=coud, epaule=epau, manche=ma,
                           tour_manche=to_ma, taille=tail,
                           poitrine=poitr, longueur_boubou=lo_bo,
@@ -105,8 +104,6 @@ def mesure_client(request):
     else:
        form = MesureForm()
     return render(request, 'folders_html/mesur.html', {'form':form})
-
-
 
 
 
