@@ -27,8 +27,13 @@ urlpatterns = [
     # url(r'^newPage/$', views.newPage, name='newPage'),
     url(r'^thanks/$', views.thanks, name='thanks'),
     url(r'^getformdata/$', views.get_form_data, name='get-form-data'),
+    # url(r'^getperson/$', views.list_person, name='list_personnes'),
     url(r'^getperson/$', views.list_person, name='list_personnes'),
     # url(r'^merci/$', views.merci, name='merci'),
+    url(r'^mesure/$', views.mesure_client, name='get-mesure-client'),
+    url(r'^depense/$', views.depenses, name='get-depense'),
+    url(r'^commande/$', views.new_command, name='get-commande'),
+    url(r'^commande_detail/$', views.commande_details, name='get-commande-detail'),
     # url(r'^mesure/$', views.mesure_data, name='get-mesure-data'),
     # url(r'^users_detail/$', views.users_detail, name='users_detail'),
 
