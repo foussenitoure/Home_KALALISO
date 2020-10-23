@@ -94,4 +94,3 @@ class Commande_DetailForm(forms.Form):
     avance             = forms.FloatField()
     reliquat           = forms.FloatField()
     remise             = forms.FloatField()
-
