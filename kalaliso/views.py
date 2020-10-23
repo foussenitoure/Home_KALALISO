@@ -3,10 +3,8 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from kalaliso.models import Person
-# Mesure
-# from kalaliso.form import PersonForm
-# MesureForm
+from kalaliso.models import Person, Depense, Mesure
+from kalaliso.form import PersonForm, MesureForm
 
 
 # Create your views here.
@@ -44,7 +42,7 @@ def mesure_client(request):
 def thanks(request):
     return HttpResponse('Thanks, your form has been processed')
 
-def get_form_data(request):
+def get_person(request):
     if request.method == 'POST':
 
             sta  = request.POST.get("status")
@@ -66,10 +64,10 @@ def get_form_data(request):
        #       cont = form.cleaned_data["contact_1"]
        #       ema = form.cleaned_data["email"]
 
-    #         return HttpResponseRedirect(reverse('thanks'))
-    # else:
-    #    form = PersonForm()
-    # return render(request, '../templates/form.html', {'form':form})
+            return HttpResponseRedirect(reverse('thanks'))
+    else:
+       form = PersonForm()
+    return render(request, '../templates/form.html', {'form':form})
 
 def list_person(request):
      model = Person
