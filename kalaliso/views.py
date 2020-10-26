@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from kalaliso.models import Person, Depense, Mesure
-from kalaliso.form import PersonForm, MesureForm, DepenseForm
+from kalaliso.models import Person, Depense, Mesure, Commande, Commande_Detail
+from kalaliso.form import PersonForm, MesureForm, DepenseForm, CommandeForm, Commande_DetailForm
 
 
 # Create your views here.
