@@ -2,6 +2,7 @@ from django import forms
 
 
 
+
 class PersonForm(forms.Form):
 
     STATUS            = (
@@ -46,8 +47,8 @@ class MesureForm(forms.Form):
         ('Tenu Securite', 'Tenu Securite'),)
 
     mesure_modele      = forms.ChoiceField(choices=MESURE_MODELE,)
-    person_mesure      = forms.IntegerField()
-    mesure_client      = forms.IntegerField()
+    person_mesure      = forms.ModelChoiceField('Person')
+    mesure_client      = forms.ModelMultipleChoiceField()
     coude              = forms.FloatField(label='Coude',)
     epaule             = forms.FloatField(label='Epaule',)
     manche             = forms.FloatField(label='Manche',)
@@ -74,9 +75,22 @@ class DepenseForm(forms.Form):
 
 
 
+class Depense_DetailForm(forms.Form):
+
+    type_depense        = forms.CharField()
+    type_materiel       = forms.CharField()
+    quantite            = forms.IntegerField()
+    prix_unitaire       = forms.IntegerField()
+    montant_unitaire    = forms.IntegerField()
+    description         = forms.CharField()
+    created_at          = forms.DateTimeField()
+
+
+
+
 class CommandeForm(forms.Form):
 
-    command_person     = forms.IntegerField()
+    command_person     = forms.ModelChoiceField()
     reception          = forms.IntegerField()
     rendez_vous        = forms.DateTimeField()
     created_at         = forms.DateTimeField()
@@ -87,6 +101,8 @@ class CommandeForm(forms.Form):
 class Commande_DetailForm(forms.Form):
 
     image              = forms.ImageField()
+    command            = forms.ModelChoiceField()
+    products           = forms.ModelMultipleChoiceField()
     couture            = forms.CharField()
     tissu              = forms.CharField()
     couloir            = forms.CharField()

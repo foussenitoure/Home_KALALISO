@@ -32,6 +32,7 @@ urlpatterns = [
     # url(r'^merci/$', views.merci, name='merci'),
     url(r'^mesure/$', views.mesure_client, name='get-mesure'),
     url(r'^depense/$', views.depenses, name='get-depense'),
+    url(r'^depense_detail/$', views.depenses_detail, name='get-depense-detail'),
     url(r'^commande/$', views.new_command, name='get-commande'),
     url(r'^commande_detail/$', views.commande_details, name='get-commande-detail'),
 
