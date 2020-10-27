@@ -27,6 +27,23 @@ class PersonForm(forms.Form):
     email              = forms.EmailField(label='Email', max_length=100)
 
 
+class ProductForm(forms.Form):
+    PRODUIT         = (
+        ('Boubou', 'Boubou'),
+        ('Grand Boubou', 'Grand Boubou'),
+        ('Chemise Complet', 'Chemise Complet'),
+        ('Chemise Manche Long', 'Chemise Manche Long'),
+        ('Chemise Manche Court', 'Chemise Manche Court'),
+        ('Pagne Jupe', 'Pagne Jupe'),
+        ('Pagne Complet', 'Pagne Complet'),
+        ('Pagne Maniere', 'Pagne Maniere'),
+        ('Patanlon', 'Patanlon'),
+        ('Tenu Scolaire', 'Tenu Scolaire'),
+        ('Tenu Securite', 'Tenu Securite'),
+        ('AUTRES', 'AUTRES'),)
+
+    produit         = forms.CharField(max_length=25, choices=PRODUIT, default='Boubou')
+
 
 class MesureForm(forms.Form):
 
@@ -48,7 +65,7 @@ class MesureForm(forms.Form):
 
     mesure_modele      = forms.ChoiceField(choices=MESURE_MODELE,)
     person_mesure      = forms.ModelChoiceField('Person')
-    mesure_client      = forms.ModelMultipleChoiceField()
+    mesure_client      = forms.ModelMultipleChoiceField('Produit')
     coude              = forms.FloatField(label='Coude',)
     epaule             = forms.FloatField(label='Epaule',)
     manche             = forms.FloatField(label='Manche',)

@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from kalaliso.models import Person, Depense, Mesure, Commande, Commande_Detail
-from kalaliso.form import PersonForm, MesureForm, DepenseForm, Depense_DetailForm, CommandeForm, Commande_DetailForm
+from kalaliso.models import Person, Depense, Mesure, Commande, Commande_Detail, Produit
+from kalaliso.form import PersonForm, MesureForm, DepenseForm, Depense_DetailForm, \
+    CommandeForm, Commande_DetailForm, ProductForm
 
 
 # Create your views here.
@@ -82,6 +83,22 @@ def list_person(request):
 
 # def merci(request):
 #     return HttpResponse('Thanks, your messure had well added')
+
+
+def product(request):
+    if request.method == 'POST':
+
+        pro = request.POST.get("produit")
+
+        data = Produit(produit=pro)
+
+        data.save()
+        return HttpResponseRedirect(reverse('thanks to select ours product'))
+    else:
+        form = ProductForm()
+    return render(request, 'folders_html/product.html', {'form': form})
+
+
 
 def mesure_client(request):
     if request.method == 'POST':

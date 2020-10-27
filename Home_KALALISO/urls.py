@@ -30,6 +30,7 @@ urlpatterns = [
     # url(r'^getperson/$', views.list_person, name='list_personnes'),
     url(r'^getperson/$', views.list_person, name='list_personnes'),
     # url(r'^merci/$', views.merci, name='merci'),
+    url(r'^produit/$', views.product, name='get-product'),
     url(r'^mesure/$', views.mesure_client, name='get-mesure'),
     url(r'^depense/$', views.depenses, name='get-depense'),
     url(r'^depense_detail/$', views.depenses_detail, name='get-depense-detail'),
