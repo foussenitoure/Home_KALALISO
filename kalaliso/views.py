@@ -70,20 +70,11 @@ def get_person(request):
                           numero_reference=nref, nina=nin,)
 
             data.save()
-
-       # if form.is_valid():
-       #       sta = form.cleaned_data['status']
-       #       se = form.cleaned_data['sex']
-       #       pre = form.cleaned_data["prenom"]
-       #       pre = form.cleaned_data["prenom"]
-       #       no = form.cleaned_data["nom"]
-       #       cont = form.cleaned_data["contact_1"]
-       #       ema = form.cleaned_data["email"]
-
             return HttpResponseRedirect(reverse('thanks'))
     else:
        form = PersonForm()
     return render(request, '../templates/form.html', {'form':form})
+
 
 def list_person(request):
      model = Person
@@ -125,18 +116,10 @@ def mesure_client(request):
             cui       = request.POST.get("cuisse")
             pat       = request.POST.get("patte")
 
-            data = Mesure(coude=coud,
-                          epaule=epau,
-                          manche=ma,
-                          tour_manche=to_ma,
-                          taille=tail,
-                          poitrine=poitr,
-                          longueur_boubou=lo_bo,
-                          longueur_patanlon=lo_pa,
-                          fesse=fes,
-                          ceinture=cei,
-                          cuisse=cui,
-                          patte=pat,)
+            data = Mesure(coude=coud, epaule=epau, manche=ma,
+                          tour_manche=to_ma, taille=tail, poitrine=poitr,
+                          longueur_boubou=lo_bo, longueur_patanlon=lo_pa,
+                          fesse=fes, ceinture=cei, cuisse=cui, patte=pat,)
             data.save()
             return HttpResponseRedirect(reverse('merci'))
     else:
@@ -173,14 +156,9 @@ def depenses_detail(request):
             des   = request.POST.get("description")
             cre  = request.POST.get("created_at")
 
-            data = Depense(type_depense=tyd,
-                           depense=de,
-                           type_materiel=tym,
-                           quantite=qte,
-                           prix_unitaire=pr_un,
-                           montant_unitaire= mont_un,
-                           description= des,
-                           created_at=cre)
+            data = Depense(type_depense=tyd, depense=de, type_materiel=tym,
+                           quantite=qte, prix_unitaire=pr_un, montant_unitaire= mont_un,
+                           description= des, created_at=cre)
             data.save()
             return HttpResponseRedirect(reverse('thanks for added new depense'))
     else:
@@ -223,16 +201,9 @@ def commande_details(request):
             rem  = request.POST.get("remise")
             cre  = request.POST.get("created_at")
 
-            data = Commande_Detail(image=img,
-                                   couture=cout,
-                                   tissu=tis,
-                                   couloir=cou,
-                                   quantite=qte,
-                                   price=pri,
-                                   avance=ava,
-                                   reliquat=rel,
-                                   remise=rem,
-                                   created_at=cre)
+            data = Commande_Detail(image=img, couture=cout, tissu=tis,
+                                   couloir=cou, quantite=qte, price=pri,
+                                   avance=ava, reliquat=rel, remise=rem, created_at=cre)
             data.save()
             return HttpResponseRedirect(reverse('thanks for new command detail'))
         else:
