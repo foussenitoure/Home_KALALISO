@@ -1,8 +1,5 @@
 from django import forms
 
-
-
-
 class PersonForm(forms.Form):
 
     STATUS            = (
@@ -20,7 +17,8 @@ class PersonForm(forms.Form):
         ('F', 'Femme'),
         ('A', 'Autres'),
     )
-    CATEGORIE = (
+
+    CATEGORIE          = (
         ('G', 'Grande'),
         ('M', 'Moyenne'),
         ('P', 'Petite'),
@@ -30,17 +28,17 @@ class PersonForm(forms.Form):
     nom                = forms.CharField(label='FIRST NAME', max_length=30)
     contact_1          = forms.IntegerField(label='TELEPHONE')
     email              = forms.EmailField(label='EMAIL', max_length=100)
-    categorie          = forms.CharField(max_length=20, choices=CATEGORIE, default='Grande')
-    domicile           = forms.CharField(label='DOMICILE', max_length=30, null=True, blank=True, default='Lafiabougou')
-    alias              = forms.CharField(label='ALIAS', max_length=30, null=True, blank=True)
-    profession         = forms.CharField(label='PROFESSION', max_length=30, null=True, blank=True)
-    contact_2          = forms.CharField(label='CONTACT 2', max_length=20, null=True, blank=True)
-    date_naissance     = forms.DateField(auto_now_add=True)
-    nationalite        = forms.CharField(label='NATIONALITE',max_length=30, null=True, blank=True)
-    tutuelle           = forms.CharField(label='TUTUELLE',max_length=30, null=True, blank=True)
-    telephonique_fix   = forms.CharField(label='TELEPHONIQUE FIXE',max_length=30, null=True, blank=True)
-    numero_reference   = forms.IntegerField(label='NUMERO REFERENCE', null=True, blank=True)
-    nina               = forms.IntegerField(label='NINA',null=True, blank=True)
+    categorie          = forms.ChoiceField(choices=CATEGORIE, required='Grande')
+    domicile           = forms.CharField(label='DOMICILE', max_length=30)
+    alias              = forms.CharField(label='ALIAS', max_length=30)
+    profession         = forms.CharField(label='PROFESSION', max_length=30)
+    contact_2          = forms.CharField(label='CONTACT 2', max_length=20)
+    date_naissance     = forms.DateField()
+    nationalite        = forms.CharField(label='NATIONALITE',max_length=30)
+    tutuelle           = forms.CharField(label='TUTUELLE',max_length=30)
+    telephonique_fix   = forms.CharField(label='TELEPHONIQUE FIXE',max_length=30)
+    numero_reference   = forms.IntegerField(label='NUMERO REFERENCE')
+    nina               = forms.IntegerField(label='NINA')
 
 
 class ProductForm(forms.Form):
