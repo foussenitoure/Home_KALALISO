@@ -20,11 +20,27 @@ class PersonForm(forms.Form):
         ('F', 'Femme'),
         ('A', 'Autres'),
     )
-    sex                = forms.ChoiceField(label='Sex', choices=SEX, required='Homme')
-    prenom             = forms.CharField(label='Last Name', max_length=30)
-    nom                = forms.CharField(label='First Name', max_length=30)
-    contact_1          = forms.IntegerField(label='Telephone')
-    email              = forms.EmailField(label='Email', max_length=100)
+    CATEGORIE = (
+        ('G', 'Grande'),
+        ('M', 'Moyenne'),
+        ('P', 'Petite'),
+    )
+    sex                = forms.ChoiceField(label='SEX', choices=SEX, required='Homme')
+    prenom             = forms.CharField(label='LAST NAME', max_length=30)
+    nom                = forms.CharField(label='FIRST NAME', max_length=30)
+    contact_1          = forms.IntegerField(label='TELEPHONE')
+    email              = forms.EmailField(label='EMAIL', max_length=100)
+    categorie          = forms.CharField(max_length=20, choices=CATEGORIE, default='Grande')
+    domicile           = forms.CharField(label='DOMICILE', max_length=30, null=True, blank=True, default='Lafiabougou')
+    alias              = forms.CharField(label='ALIAS', max_length=30, null=True, blank=True)
+    profession         = forms.CharField(label='PROFESSION', max_length=30, null=True, blank=True)
+    contact_2          = forms.CharField(label='CONTACT 2', max_length=20, null=True, blank=True)
+    date_naissance     = forms.DateField(auto_now_add=True)
+    nationalite        = forms.CharField(label='NATIONALITE',max_length=30, null=True, blank=True)
+    tutuelle           = forms.CharField(label='TUTUELLE',max_length=30, null=True, blank=True)
+    telephonique_fix   = forms.CharField(label='TELEPHONIQUE FIXE',max_length=30, null=True, blank=True)
+    numero_reference   = forms.IntegerField(label='NUMERO REFERENCE', null=True, blank=True)
+    nina               = forms.IntegerField(label='NINA',null=True, blank=True)
 
 
 class ProductForm(forms.Form):
@@ -42,7 +58,7 @@ class ProductForm(forms.Form):
         ('Tenu Securite', 'Tenu Securite'),
         ('AUTRES', 'AUTRES'),)
 
-    produit          = forms.ChoiceField(choices=PRODUIT,)
+    produit          = forms.ChoiceField(label='PRODUCT', choices=PRODUIT, required='Boubou')
 
 
 class MesureForm(forms.Form):
@@ -63,9 +79,28 @@ class MesureForm(forms.Form):
         ('Tenu Scolaire', 'Tenu Scolaire'),
         ('Tenu Securite', 'Tenu Securite'),)
 
+    PRODUCTS_MODEL      = (
+        ('Boubou', 'Boubou'),
+        ('Grand Boubou', 'Grand Boubou'),
+        ('Chemise Complet', 'Chemise Complet'),
+        ('Chemise Manche Long', 'Chemise Manche Long'),
+        ('Chemise Manche Court', 'Chemise Manche Court'),
+        ('Pagne Jupe', 'Pagne Jupe'),
+        ('Pagne Complet', 'Pagne Complet'),
+        ('Pagne Maniere', 'Pagne Maniere'),
+        ('Patanlon', 'Patanlon'),
+        ('Veste complet', 'Veste Complet'),
+        ('Abacos Complet', 'Abacos Complet'),
+        ('Abacos Simple', 'Abacos Simple'),
+        ('Tenu Scolaire', 'Tenu Scolaire'),
+        ('Tenu Securite', 'Tenu Securite'),)
+
     mesure_modele      = forms.ChoiceField(choices=MESURE_MODELE,)
     person_mesure      = forms.ModelChoiceField('Person')
-    mesure_client      = forms.ModelMultipleChoiceField('Produit')
+    mesure_client      = forms.ModelMultipleChoiceField(label='Product',
+                                                        required=False,
+                                                        widget=forms.CheckboxSelectMultiple,
+                                                        choices='PRODUCTS_MODEL')
     coude              = forms.FloatField(label='Coude',)
     epaule             = forms.FloatField(label='Epaule',)
     manche             = forms.FloatField(label='Manche',)
@@ -82,7 +117,6 @@ class MesureForm(forms.Form):
     updated_at         = forms.DateTimeField()
 
 
-
 class DepenseForm(forms.Form):
 
     titulaire_depense  = forms.IntegerField()
@@ -95,6 +129,7 @@ class DepenseForm(forms.Form):
 class Depense_DetailForm(forms.Form):
 
     type_depense        = forms.CharField()
+    depense             = forms.ModelChoiceField('Depense', )
     type_materiel       = forms.CharField()
     quantite            = forms.IntegerField()
     prix_unitaire       = forms.IntegerField()
@@ -104,22 +139,41 @@ class Depense_DetailForm(forms.Form):
 
 
 
-
 class CommandeForm(forms.Form):
 
     command_person     = forms.ModelChoiceField()
     reception          = forms.IntegerField()
     rendez_vous        = forms.DateTimeField()
     created_at         = forms.DateTimeField()
-    livre = forms.BooleanField()
+    livre              = forms.BooleanField()
 
 
 
 class Commande_DetailForm(forms.Form):
 
+    PRODUCTS_MODEL      = (
+        ('Boubou', 'Boubou'),
+        ('Grand Boubou', 'Grand Boubou'),
+        ('Chemise Complet', 'Chemise Complet'),
+        ('Chemise Manche Long', 'Chemise Manche Long'),
+        ('Chemise Manche Court', 'Chemise Manche Court'),
+        ('Pagne Jupe', 'Pagne Jupe'),
+        ('Pagne Complet', 'Pagne Complet'),
+        ('Pagne Maniere', 'Pagne Maniere'),
+        ('Patanlon', 'Patanlon'),
+        ('Veste complet', 'Veste Complet'),
+        ('Abacos Complet', 'Abacos Complet'),
+        ('Abacos Simple', 'Abacos Simple'),
+        ('Tenu Scolaire', 'Tenu Scolaire'),
+        ('Tenu Securite', 'Tenu Securite'),)
+
+
     image              = forms.ImageField()
-    command            = forms.ModelChoiceField()
-    products           = forms.ModelMultipleChoiceField()
+    command            = forms.ModelChoiceField('Commande')
+    products           = forms.ModelMultipleChoiceField(label='Product',
+                                                        required=False,
+                                                        widget=forms.CheckboxSelectMultiple,
+                                                        choices='PRODUCTS_MODEL')
     couture            = forms.CharField()
     tissu              = forms.CharField()
     couloir            = forms.CharField()

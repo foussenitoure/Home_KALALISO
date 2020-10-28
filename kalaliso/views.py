@@ -50,13 +50,25 @@ def get_person(request):
             no   = request.POST.get("nom")
             cont = request.POST.get("contact_1")
             ema = request.POST.get("email")
+            cat = request.POST.get("categorie")
+            dom = request.POST.get("domicile")
+            al = request.POST.get("alias")
+            pro = request.POST.get("profession")
+            cont2 = request.POST.get("contact_2")
+            dtna = request.POST.get("date_naissance")
+            nat  = request.POST.get("nationalité")
+            tut = request.POST.get("tutuelle")
+            telep = request.POST.get("telephone_fix")
+            nref = request.POST.get("numero_reference")
+            nin = request.POST.get("nina")
 
-            data = Person(status=sta,
-                          prenom=pre,
-                          nom=no,
-                          sex=se,
-                          contact_1=cont,
-                          email=ema)
+            data = Person(status=sta, prenom=pre, nom=no,
+                          sex=se, contact_1=cont, email=ema,
+                          categorie=cat, domicile=dom, alias=al,
+                          profession=pro, contact_2=cont2, date_naissance=dtna,
+                          nationalite=nat, tutuelle=tut, telephonique_fix=telep,
+                          numero_reference=nref, nina=nin,)
+
             data.save()
 
        # if form.is_valid():
@@ -82,22 +94,20 @@ def list_person(request):
 
 
 # def merci(request):
-#     return HttpResponse('Thanks, your messure had well added')
+#     return HttpResponse('Thanks, your mesure had well added')
 
 
 def product(request):
     if request.method == 'POST':
 
         pro = request.POST.get("produit")
-
         data = Produit(produit=pro)
 
         data.save()
-        return HttpResponseRedirect(reverse('thanks to select ours product'))
+        return HttpResponseRedirect(reverse('thanks to select ours products'))
     else:
         form = ProductForm()
     return render(request, 'folders_html/product.html', {'form': form})
-
 
 
 def mesure_client(request):
@@ -155,6 +165,7 @@ def depenses_detail(request):
     if request.method == 'POST':
 
             tyd  = request.POST.get("type_depense")
+            de   = request.POST.get('depense')
             tym  = request.POST.get("type_materiel")
             qte   = request.POST.get("quantite")
             pr_un   = request.POST.get("prix_unitaire")
@@ -163,6 +174,7 @@ def depenses_detail(request):
             cre  = request.POST.get("created_at")
 
             data = Depense(type_depense=tyd,
+                           depense=de,
                            type_materiel=tym,
                            quantite=qte,
                            prix_unitaire=pr_un,

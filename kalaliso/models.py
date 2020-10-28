@@ -8,7 +8,7 @@ from django.db import models
 # sys.setdefaultencoding('utf-8')
 # import os, sys
 
-from imp import reload
+# from import reload
 from django.db.models import FloatField
 # from django.utils.encoding import python_2_unicode_compatible
 from functools import update_wrapper
@@ -233,7 +233,7 @@ class Depense_Detail(models.Model):
             )
 
             type_materiel      = models.CharField(max_length=30, choices=TYPE_MATERIEL, default='Fil', )
-
+            depense            = models.ForeignKey('Depense', on_delete=models.DO_NOTHING, verbose_name='depense')
             quantite           = models.PositiveSmallIntegerField(default=1)
             prix_unitaire      = models.PositiveIntegerField(null=True, blank=True)
             montant_unitaire   = models.PositiveIntegerField(null=True, blank=True)
