@@ -42,7 +42,7 @@ class ProductForm(forms.Form):
         ('Tenu Securite', 'Tenu Securite'),
         ('AUTRES', 'AUTRES'),)
 
-    produit         = forms.CharField(max_length=25, choices=PRODUIT, default='Boubou')
+    produit          = forms.ChoiceField(choices=PRODUIT,)
 
 
 class MesureForm(forms.Form):

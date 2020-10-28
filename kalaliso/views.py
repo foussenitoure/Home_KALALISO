@@ -170,7 +170,7 @@ def depenses_detail(request):
                            description= des,
                            created_at=cre)
             data.save()
-            return HttpResponseRedirect(reverse('thanks'))
+            return HttpResponseRedirect(reverse('thanks for added new depense'))
     else:
         form = Depense_DetailForm()
     return render(request, 'folders_html/depense_detail.html', {'form': form})
