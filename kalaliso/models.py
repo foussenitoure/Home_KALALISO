@@ -67,7 +67,6 @@ class Person(models.Model):
     def __str__(self):
         return'{} {} {}'.format(self.prenom, self.nom, self.contact_1)
 
-
 class Mesure(models.Model):
     MESURE_MODELE  = (
         ('Boubou', 'Boubou'),

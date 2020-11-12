@@ -99,6 +99,17 @@ class MesureForm(forms.Form):
                                                         required=False,
                                                         widget=forms.CheckboxSelectMultiple,
                                                         choices='PRODUCTS_MODEL')
+
+
+
+    # def __init__(self, *args, user=None, **kwargs):
+    #             super().__init__(*args, **kwargs)
+    #     if user:
+    #         listdata = self.fields['listdata']
+    #         listdata.queryset = listdata.queryset.filter(author=user)
+        # (queryset=List.objects.all())
+
+
     coude              = forms.FloatField(label='Coude',)
     epaule             = forms.FloatField(label='Epaule',)
     manche             = forms.FloatField(label='Manche',)
