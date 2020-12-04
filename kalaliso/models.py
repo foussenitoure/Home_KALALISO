@@ -27,6 +27,7 @@ import sys
 
 class Person(models.Model):
     # image = models.ImageField(upload_to='photos/profil%Y/%m/%d', null=True, blank=True, verbose_name='Photo_commande')
+
     STATUS = (
         ('Client', 'CLIENT'),
         ('Ouvrier', 'OUVRIER'),
@@ -55,38 +56,38 @@ class Person(models.Model):
     alias            = models.CharField(verbose_name='alias', max_length=30, null=True, blank=True)
     profession       = models.CharField(max_length=30, null=True, blank=True)
     contact_2        = models.CharField(max_length=20, null=True, blank=True)
-    date_naissance   = models.DateField(auto_now_add=True)
+    date_naissance   = models.DateField(auto_now_add=False)
     nationalite      = models.CharField(max_length=30, null=True, blank=True)
     tutuelle         = models.CharField(max_length=30, null=True, blank=True)
     telephonique_fix = models.CharField(max_length=30, null=True, blank=True)
     numero_reference = models.PositiveIntegerField(null=True, blank=True)
     nina             = models.PositiveIntegerField(null=True, blank=True)
     # create_at        =  models.DateTimeField(auto_now_add=True)
-    # update_at        = models.DateTimeField(auto_now_add=False)
+    update_at        = models.DateTimeField(auto_now_add=False)
 
     def __str__(self):
         return'{} {} {}'.format(self.prenom, self.nom, self.contact_1)
 
 class Mesure(models.Model):
-    MESURE_MODELE  = (
-        ('Boubou', 'Boubou'),
-        ('Grand Boubou', 'Grand Boubou'),
-        ('Chemise Complet', 'Chemise Complet'),
-        ('Chemise Manche Long', 'Chemise Manche Long'),
-        ('Chemise Manche Court', 'Chemise Manche Court'),
-        ('Pagne Jupe', 'Pagne Jupe'),
-        ('Pagne Complet', 'Pagne Complet'),
-        ('Pagne Maniere', 'Pagne Maniere'),
-        ('Patanlon', 'Patanlon'),
-        ('Veste complet', 'Veste Complet'),
-        ('Abacos Complet', 'Abacos Complet'),
-        ('Abacos Simple', 'Abacos Simple'),
-        ('Tenu Scolaire', 'Tenu Scolaire'),
-        ('Tenu Securite', 'Tenu Securite'),)
-
-    mesure_modele   = models.CharField(max_length=50, primary_key=True, choices=MESURE_MODELE, default='Boubou')
+    # MESURE_MODELE  = (
+    #     ('Boubou', 'Boubou'),
+    #     ('Grand Boubou', 'Grand Boubou'),
+    #     ('Chemise Complet', 'Chemise Complet'),
+    #     ('Chemise Manche Long', 'Chemise Manche Long'),
+    #     ('Chemise Manche Court', 'Chemise Manche Court'),
+    #     ('Pagne Jupe', 'Pagne Jupe'),
+    #     ('Pagne Complet', 'Pagne Complet'),
+    #     ('Pagne Maniere', 'Pagne Maniere'),
+    #     ('Patanlon', 'Patanlon'),
+    #     ('Veste complet', 'Veste Complet'),
+    #     ('Abacos Complet', 'Abacos Complet'),
+    #     ('Abacos Simple', 'Abacos Simple'),
+    #     ('Tenu Scolaire', 'Tenu Scolaire'),
+    #     ('Tenu Securite', 'Tenu Securite'),)
+    #
+    # mesure_modele   = models.CharField(max_length=50, primary_key=True, choices=MESURE_MODELE, default='Boubou')
     person_mesure   = models.ForeignKey('Person', on_delete=models.CASCADE, verbose_name='Client')
-    mesure_client   = models.ManyToManyField('Produit', verbose_name='Mesure Par Produit')
+    # mesure_client   = models.ManyToManyField('Produit', verbose_name='Mesure Par Produit')
     # person          = models.ManyToManyField('Person')
     coude           = models.FloatField(null=True, blank=True)
     epaule          = models.FloatField(null=True, blank=True)
@@ -144,15 +145,15 @@ class Commande(models.Model):
 
 class Commande_Detail(models.Model):
         command      = models.ForeignKey('Commande', on_delete=models.DO_NOTHING)
-        products    = models.ManyToManyField('Produit', verbose_name='list_commande')
-        image       = models.ImageField(upload_to='photos/modele/%Y/%m/%d', null=True, blank=True, verbose_name='Photo_commande')
-        COUTURE     = (
+        products     = models.ManyToManyField('Produit', verbose_name='list_commande')
+        image        = models.ImageField(upload_to='photos/modele/%Y/%m/%d', null=True, blank=True, verbose_name='Photo_commande')
+        COUTURE      = (
             ('BRODERIE', 'Broderie'),
             ('COUTURE SIMPLE', 'Couture simple'),
             ('COUTURE A MAIN', 'Couture a main'),
             ('REPARATION', 'Reparation'),)
-        couture     = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
-        TISSU       = (
+        couture      = models.CharField(max_length=25, choices=COUTURE, default='Broderie')
+        TISSU        = (
             ('BAZIN GETZNER', 'BAZIN GETZNER'),
             ('BAZIN RICHE', 'BAZIN RICHE'),
             ('BAZIN MOYEN', 'BAZIN MOYEN'),
@@ -164,8 +165,8 @@ class Commande_Detail(models.Model):
             ('VOILE', 'VOILE'),
             ('BOGOLAN', 'BOGOLAN'),
             ('AUTRES', 'AUTRES'),)
-        tissu       = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
-        COULOIR     = (
+        tissu         = models.CharField(max_length=25, choices=TISSU, default='BAZIN GETZNER')
+        COULOIR       = (
             ('BLANCHE', 'BLANCHE'),
             ('ROUGE SANG', 'ROUGE SANG'),
             ('BLEU', 'BLEU'),
@@ -202,7 +203,7 @@ class Commande_Detail(models.Model):
 
 class Depense(models.Model):
         titulaire_depense        = models.ForeignKey('Person', on_delete=models.DO_NOTHING, verbose_name='Titulaire Depense',)
-        montant_total            = models.PositiveIntegerField(null=True, blank=True)
+        montant                   = models.PositiveIntegerField(null=True, blank=True)
         is_valide                = models.BooleanField(default=False)
         created_at               = models.DateTimeField(auto_now_add=True)
 
@@ -213,7 +214,7 @@ class Depense_Detail(models.Model):
             MODE_DEPENSE = (
                 ('MATERIELS', 'Materiels'),
                 ('FRAIS OUVRIER', 'Frais_Ouvrier'),
-                # ('BON', 'Bon'),
+                ('BON', 'Bon'),
                 ('LOCATION', 'Location'),
                 ('ELECTRICITE', 'Electricite'),
                 ('CONSOMMABLE', 'Consommable'),

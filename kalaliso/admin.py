@@ -5,14 +5,10 @@ from django.contrib import auth
 from django import forms
 from django.utils import timezone
 # from suit.admin import SortableTabularInline
-from kalaliso.models import Person, Depense, Depense_Detail,  Mesure, Commande, Produit, Commande_Detail
-
-
-
-    #  Depense, ,  Vente, Programme, \
-    # DivisionAdministrativeMali
-
-# UserProfileInfo, User,
+from kalaliso.models import Person, Depense, \
+                            Depense_Detail,  \
+                            Mesure, Commande, \
+                            Produit, Commande_Detail
 
 class KALALISOAdminSite(admin.AdminSite):
 
@@ -89,7 +85,7 @@ class MesureAdmin(admin.ModelAdmin):
     models = Mesure
     fields = [
               'person_mesure',
-              'mesure_modele',
+              # 'mesure_modele',
               'mesure_client',
               'coude',
               'epaule',
@@ -109,7 +105,7 @@ class MesureAdmin(admin.ModelAdmin):
 
     list_display = (
                 'person_mesure',
-                'mesure_modele',
+                # 'mesure_modele',
                 'coude',
                 'epaule',
                 'manche',
@@ -219,17 +215,16 @@ class DepenseAdmin(admin.ModelAdmin):
     models = Depense
     fields = [
               'titulaire_depense',
-              'montant_total',
+              'montant',
               'is_valide',
               # 'created_at',
-
-              ]
+        ]
 
     exclude = ['created_at',]
 
     list_display = (
                     'titulaire_depense',
-                    'montant_total',
+                    'montant',
                     'is_valide',
                     # 'created_at',
                     )

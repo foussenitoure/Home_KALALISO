@@ -39,6 +39,8 @@ class PersonForm(forms.Form):
     telephonique_fix   = forms.CharField(label='TELEPHONIQUE FIXE',max_length=30)
     numero_reference   = forms.IntegerField(label='NUMERO REFERENCE')
     nina               = forms.IntegerField(label='NINA')
+    create_at          = forms.DateTimeField()
+    update_at          = forms.DateTimeField()
 
 
 class ProductForm(forms.Form):
@@ -61,21 +63,21 @@ class ProductForm(forms.Form):
 
 class MesureForm(forms.Form):
 
-    MESURE_MODELE      = (
-        ('Boubou', 'Boubou'),
-        ('Grand Boubou', 'Grand Boubou'),
-        ('Chemise Complet', 'Chemise Complet'),
-        ('Chemise Manche Long', 'Chemise Manche Long'),
-        ('Chemise Manche Court', 'Chemise Manche Court'),
-        ('Pagne Jupe', 'Pagne Jupe'),
-        ('Pagne Complet', 'Pagne Complet'),
-        ('Pagne Maniere', 'Pagne Maniere'),
-        ('Patanlon', 'Patanlon'),
-        ('Veste complet', 'Veste Complet'),
-        ('Abacos Complet', 'Abacos Complet'),
-        ('Abacos Simple', 'Abacos Simple'),
-        ('Tenu Scolaire', 'Tenu Scolaire'),
-        ('Tenu Securite', 'Tenu Securite'),)
+    # MESURE_MODELE      = (
+    #     ('Boubou', 'Boubou'),
+    #     ('Grand Boubou', 'Grand Boubou'),
+    #     ('Chemise Complet', 'Chemise Complet'),
+    #     ('Chemise Manche Long', 'Chemise Manche Long'),
+    #     ('Chemise Manche Court', 'Chemise Manche Court'),
+    #     ('Pagne Jupe', 'Pagne Jupe'),
+    #     ('Pagne Complet', 'Pagne Complet'),
+    #     ('Pagne Maniere', 'Pagne Maniere'),
+    #     ('Patanlon', 'Patanlon'),
+    #     ('Veste complet', 'Veste Complet'),
+    #     ('Abacos Complet', 'Abacos Complet'),
+    #     ('Abacos Simple', 'Abacos Simple'),
+    #     ('Tenu Scolaire', 'Tenu Scolaire'),
+    #     ('Tenu Securite', 'Tenu Securite'),)
 
     PRODUCTS_MODEL      = (
         ('Boubou', 'Boubou'),
@@ -93,12 +95,12 @@ class MesureForm(forms.Form):
         ('Tenu Scolaire', 'Tenu Scolaire'),
         ('Tenu Securite', 'Tenu Securite'),)
 
-    mesure_modele      = forms.ChoiceField(choices=MESURE_MODELE,)
-    person_mesure      = forms.ModelChoiceField('Person')
-    mesure_client      = forms.ModelMultipleChoiceField(label='Product',
-                                                        required=False,
-                                                        widget=forms.CheckboxSelectMultiple,
-                                                        choices='PRODUCTS_MODEL')
+    # mesure_modele      = forms.ChoiceField(choices=MESURE_MODELE,)
+    # person_mesure      = forms.ModelChoiceField('Person')
+    # mesure_client      = forms.ModelMultipleChoiceField(label='Product',
+    #                                                     required=False,
+    #                                                     widget=forms.CheckboxSelectMultiple,
+    #                                                     choices='PRODUCTS_MODEL')
 
 
 
@@ -138,7 +140,7 @@ class DepenseForm(forms.Form):
 class Depense_DetailForm(forms.Form):
 
     type_depense        = forms.CharField()
-    depense             = forms.ModelChoiceField('Depense', )
+    # depense             = forms.ModelChoiceField('Depense',)
     type_materiel       = forms.CharField()
     quantite            = forms.IntegerField()
     prix_unitaire       = forms.IntegerField()
@@ -147,10 +149,9 @@ class Depense_DetailForm(forms.Form):
     created_at          = forms.DateTimeField()
 
 
-
 class CommandeForm(forms.Form):
 
-    command_person     = forms.ModelChoiceField()
+    # command_person     = forms.ModelChoiceField()
     reception          = forms.IntegerField()
     rendez_vous        = forms.DateTimeField()
     created_at         = forms.DateTimeField()
@@ -178,11 +179,11 @@ class Commande_DetailForm(forms.Form):
 
 
     image              = forms.ImageField()
-    command            = forms.ModelChoiceField('Commande')
-    products           = forms.ModelMultipleChoiceField(label='Product',
-                                                        required=False,
-                                                        widget=forms.CheckboxSelectMultiple,
-                                                        choices='PRODUCTS_MODEL')
+    # command            = forms.ModelChoiceField('Commande')
+    # products           = forms.ModelMultipleChoiceField(label='Product',
+    #                                                     required=False,
+    #                                                     widget=forms.CheckboxSelectMultiple,
+    #                                                     choices='PRODUCTS_MODEL')
     couture            = forms.CharField()
     tissu              = forms.CharField()
     couloir            = forms.CharField()

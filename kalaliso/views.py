@@ -2,9 +2,13 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from kalaliso.models import Person, Depense, Mesure, Commande, Commande_Detail, Produit
-from kalaliso.form import PersonForm, MesureForm, DepenseForm, Depense_DetailForm, \
-    CommandeForm, Commande_DetailForm, ProductForm
+from kalaliso.models import Person, Depense, \
+                            Mesure, Commande, \
+                            Commande_Detail, Produit
+
+from kalaliso.form import PersonForm, MesureForm, \
+                          DepenseForm, Depense_DetailForm, \
+                          CommandeForm, Commande_DetailForm, ProductForm
 
 
 # Create your views here.
@@ -44,30 +48,33 @@ def thanks(request):
 def get_person(request):
     if request.method == 'POST':
 
-            sta  = request.POST.get("status")
-            se   = request.POST.get("sex")
-            pre  = request.POST.get("prenom")
-            no   = request.POST.get("nom")
-            cont = request.POST.get("contact_1")
-            ema = request.POST.get("email")
-            cat = request.POST.get("categorie")
-            dom = request.POST.get("domicile")
-            al = request.POST.get("alias")
-            pro = request.POST.get("profession")
-            cont2 = request.POST.get("contact_2")
-            dtna = request.POST.get("date_naissance")
-            nat  = request.POST.get("nationalité")
-            tut = request.POST.get("tutuelle")
-            telep = request.POST.get("telephone_fix")
-            nref = request.POST.get("numero_reference")
-            nin = request.POST.get("nina")
+            sta      = request.POST.get("status")
+            se       = request.POST.get("sex")
+            pre      = request.POST.get("prenom")
+            no       = request.POST.get("nom")
+            cont     = request.POST.get("contact_1")
+            ema      = request.POST.get("email")
+            cat      = request.POST.get("categorie")
+            dom      = request.POST.get("domicile")
+            al       = request.POST.get("alias")
+            pro      = request.POST.get("profession")
+            cont2    = request.POST.get("contact_2")
+            dtna     = request.POST.get("date_naissance")
+            nat      = request.POST.get("nationalité")
+            tut      = request.POST.get("tutuelle")
+            telep    = request.POST.get("telephone_fix")
+            nref     = request.POST.get("numero_reference")
+            nin      = request.POST.get("nina")
+            creat    = request.POST.get("created_at")
+            updat    = request.POST.get("update_at")
+
 
             data = Person(status=sta, prenom=pre, nom=no,
                           sex=se, contact_1=cont, email=ema,
                           categorie=cat, domicile=dom, alias=al,
                           profession=pro, contact_2=cont2, date_naissance=dtna,
                           nationalite=nat, tutuelle=tut, telephonique_fix=telep,
-                          numero_reference=nref, nina=nin,)
+                          numero_reference=nref, nina=nin, create_at=creat, update_at=updat)
 
             data.save()
             return HttpResponseRedirect(reverse('thanks'))
@@ -91,8 +98,8 @@ def list_person(request):
 def product(request):
     if request.method == 'POST':
 
-        pro = request.POST.get("produit")
-        data = Produit(produit=pro)
+        pro     = request.POST.get("produit")
+        data    = Produit(produit=pro)
 
         data.save()
         return HttpResponseRedirect(reverse('thanks to select ours products'))
@@ -147,18 +154,18 @@ def depenses(request):
 def depenses_detail(request):
     if request.method == 'POST':
 
-            tyd  = request.POST.get("type_depense")
-            de   = request.POST.get('depense')
-            tym  = request.POST.get("type_materiel")
-            qte   = request.POST.get("quantite")
+            tyd     = request.POST.get("type_depense")
+            de      = request.POST.get('depense')
+            tym     = request.POST.get("type_materiel")
+            qte     = request.POST.get("quantite")
             pr_un   = request.POST.get("prix_unitaire")
-            mont_un   = request.POST.get("montant_unitaire")
-            des   = request.POST.get("description")
-            cre  = request.POST.get("created_at")
+            mont_un = request.POST.get("montant_unitaire")
+            des     = request.POST.get("description")
+            cre     = request.POST.get("created_at")
 
             data = Depense(type_depense=tyd, depense=de, type_materiel=tym,
                            quantite=qte, prix_unitaire=pr_un, montant_unitaire= mont_un,
-                           description= des, created_at=cre)
+                           description=des, created_at=cre)
             data.save()
             return HttpResponseRedirect(reverse('thanks for added new depense'))
     else:
@@ -169,13 +176,13 @@ def depenses_detail(request):
 def new_command(request):
     if request.method == 'POST':
 
-        recep = request.POST.get("reception")
-        mont = request.POST.get("montant_total")
-        rendv = request.POST.get("rendez_vous")
-        liv = request.POST.get("livre")
-        cre  = request.POST.get("created_at")
+        recep    = request.POST.get("reception")
+        mont     = request.POST.get("montant_total")
+        rendv    = request.POST.get("rendez_vous")
+        liv      = request.POST.get("livre")
+        cre      = request.POST.get("created_at")
 
-        data = Commande(reception=recep,
+        data     = Commande(reception=recep,
                         montant_total=mont,
                         rendez_vous=rendv,
                         livre=liv,
