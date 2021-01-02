@@ -21,10 +21,10 @@ class KALALISOAdminSite(admin.AdminSite):
 admin.site = KALALISOAdminSite(name="admin")
 
 class PersonAdmin(admin.ModelAdmin):
-    # save_on_top = True
+    save_on_top = True
     models = Person
     fields = [
-              # 'image',
+              ## 'image',
               'status',
               'prenom',
               'nom',
