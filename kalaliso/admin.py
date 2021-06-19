@@ -5,9 +5,9 @@ from django.contrib import auth
 from django import forms
 from django.utils import timezone
 # from suit.admin import SortableTabularInline
-from kalaliso.models import Person, Depense, ItemsDepense,  Mesure, Orders, Produit, ItemsOrders
+from kalaliso.models import Person, Depense,   Mesure, Order, Produit
 
-
+# ItemsDepense, ItemsOrders
 
     #  Depense, ,  Vente, Programme, \
     # DivisionAdministrativeMali
@@ -71,11 +71,12 @@ class ProduitAdmin(admin.ModelAdmin):
     models = Produit
     fields = [
              'produit',
+             'price',
             ]
 
    #  exclude = ['profession',
    # ]
-    list_display = ('produit',)
+    list_display = ('produit', 'price',)
 
     # ordering  = ['created_at']
     # date_hierarchy = 'created_at'
@@ -126,13 +127,13 @@ class MesureAdmin(admin.ModelAdmin):
     # search_fields = []
 admin.site.register(Mesure, MesureAdmin)
 
-class OrdersAdmin(admin.ModelAdmin):
+class OrderAdmin(admin.ModelAdmin):
     save_on_top = True
-    models = Orders
+    models = Order
     fields = [
                'command_person',
                'montant_total',
-               # 'products',
+               'products',
                'rendez_vous',
                # 'create_at',
                'livre',
@@ -157,61 +158,61 @@ class OrdersAdmin(admin.ModelAdmin):
 
     list_filter = []
     search_fields = []
-admin.site.register(Orders, OrdersAdmin)
+admin.site.register(Order, OrderAdmin)
 
 
-class ItemsOrdersAdmin(admin.ModelAdmin):
-    save_on_top = True
-    models = ItemsOrders
-    fields = [
-              #'command_person',
-               'orders',
-              #'products',
-               'image',
-               'quantite',
-               'couture',
-               'tissu',
-               'couloir',
-               'metrage',
-               'price',
-               #'sub_price',
-               'avance',
-               'reliquat',
-               #'remise',
-               #'rendez_vous',
-
-               ]
+# class ItemsOrdersAdmin(admin.ModelAdmin):
+#     save_on_top = True
+#     models = ItemsOrders
+#     fields = [
+#               #'command_person',
+#                'orders',
+#               #'products',
+#                'image',
+#                'quantite',
+#                'couture',
+#                'tissu',
+#                'couloir',
+#                'metrage',
+#                'price',
+#                #'sub_price',
+#                'avance',
+#                'reliquat',
+#                #'remise',
+#                #'rendez_vous',
+#
+#                ]
 
     # exclude = [
     #            # 'sub_price',
     #            # 'remise',
     #           ]
 
-    list_display = (
-                     # 'command_person',
-                     'orders',
-                     # 'products',
-                     'image',
-                     'quantite',
-                     'couture',
-                     'tissu',
-                     'couloir',
-                     'metrage',
-                     'price',
-                     #'sub_price',
-                     'avance',
-                     'reliquat',
-                     # 'remise',
-                     # 'montant_total',
-                     # 'rendez_vous',
-                     # 'livre',
-                     )
-
-    ordering = []
-
-    list_filter = []
-    search_fields = []
-admin.site.register(ItemsOrders, ItemsOrdersAdmin)
+#     list_display = (
+#                      # 'command_person',
+#                      'orders',
+#                      # 'products',
+#                      'image',
+#                      'quantite',
+#                      'couture',
+#                      'tissu',
+#                      'couloir',
+#                      'metrage',
+#                      'price',
+#                      #'sub_price',
+#                      'avance',
+#                      'reliquat',
+#                      # 'remise',
+#                      # 'montant_total',
+#                      # 'rendez_vous',
+#                      # 'livre',
+#                      )
+#
+#     ordering = []
+#
+#     list_filter = []
+#     search_fields = []
+# admin.site.register(ItemsOrders, ItemsOrdersAdmin)
 
 
 class DepenseAdmin(admin.ModelAdmin):
@@ -239,37 +240,37 @@ class DepenseAdmin(admin.ModelAdmin):
     search_fields = []
 admin.site.register(Depense, DepenseAdmin)
 
-class ItemsDepenseAdmin(admin.ModelAdmin):
-    save_on_top = True
-    models = ItemsDepense
-    fields = [
-              'type_depense',
-              'type_materiel',
-              'quantite',
-              'prix_unitaire',
-              'montant_unitaire',
-              'description',
-              # 'created_at',
-
-              ]
-
-    exclude = ['created_at',]
-
-    list_display = (
-                    'type_depense',
-                    'type_materiel',
-                    # 'titulaire_depense',
-                    'quantite',
-                    'prix_unitaire',
-                    'montant_unitaire',
-                    'description',
-                    # 'created_at',
-                    )
-
-    ordering = ['created_at',]
-    list_filter = ['description']
-    search_fields = []
-admin.site.register(ItemsDepense, ItemsDepenseAdmin)
+# class ItemsDepenseAdmin(admin.ModelAdmin):
+#     save_on_top = True
+#     models = ItemsDepense
+#     fields = [
+#               'type_depense',
+#               'type_materiel',
+#               'quantite',
+#               'prix_unitaire',
+#               'montant_unitaire',
+#               'description',
+#               # 'created_at',
+#
+#               ]
+#
+#     exclude = ['created_at',]
+#
+#     list_display = (
+#                     'type_depense',
+#                     'type_materiel',
+#                     # 'titulaire_depense',
+#                     'quantite',
+#                     'prix_unitaire',
+#                     'montant_unitaire',
+#                     'description',
+#                     # 'created_at',
+#                     )
+#
+#     ordering = ['created_at',]
+#     list_filter = ['description']
+#     search_fields = []
+# admin.site.register(ItemsDepense, ItemsDepenseAdmin)
 
 
 
